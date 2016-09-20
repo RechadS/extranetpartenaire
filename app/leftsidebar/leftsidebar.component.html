@@ -1,0 +1,37 @@
+<div class="leftsidebar col-sm-2">
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand"><img src="../../public/img/logo-extranet.png"></span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a [routerLink]="['/private', 'home']" routerLinkActive="active"><img src="../../public/img/home-icon.png">Accueil</a>
+            </li>
+            <li>
+              <a [routerLink]="['/private', 'declarer']" routerLinkActive="active"><img src="../../public/img/compose-icon.png">Déclarer une affaire</a>
+            </li>
+            <li>
+              <a [routerLink]="['/private', 'declarations']" routerLinkActive="active"><img src="../../public/img/listDeclarations-icon.png">Déclarations <span class="badge">5</span></a>
+            </li>
+            <li>
+              <a [routerLink]="['/private', 'client']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Clients <span class="badge">5</span></a>
+            </li>
+            <li>
+              <a [routerLink]="['/private', 'documentation']" routerLinkActive="active"><img src="../../public/img/documentation-icon.png">Documentation</a></li>
+            <li><a href="#"><img src="../../public/img/tutorials-icon.png">Tutoriels</a></li>
+            <li><a [routerLink]="['/private', 'contact']" routerLinkActive="active"><img src="../../public/img/contact-icon.png">Contact</a></li>
+            <li><a (click)="logout()" href="#"><img src="../../public/img/deconnexion-icon.png">Déconnexion</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+</div>
+

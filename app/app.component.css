@@ -1,0 +1,26 @@
+.rowcontainer{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.badge{
+  background-color: #f29400;
+  margin-top: -17px;
+  margin-left: 3px;
+}
+
+.appcontainer{
+    padding: 0;
+  }
+  
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+
+  .appcontainer, .rowcontainer{
+    height: 100%;
+  }
+
+  
+
+}

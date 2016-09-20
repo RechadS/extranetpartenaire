@@ -1,0 +1,37 @@
+<div class="col-md-12 text-center fill">
+    <div class="col-md-4 col-md-offset-4 mg-t-100">
+        <div class="title text-center">
+            <img src="public/img/Logo_AddendaPartenaires.png" width="200">
+        </div>
+
+        <div class="panel-body">
+            <div class="row text-center">
+                <span class="input input--hoshi">
+                    <input class="input__field input__field--hoshi" [(ngModel)]="user.email" id="email" 
+                        type="text" />
+                    <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                        <span class="input__label-content input__label-content--hoshi">Identifiant</span>
+                    </label>
+                </span>
+            </div>
+
+            <div class="row text-center">
+                <span class="input input--hoshi">
+                    <input class="input__field input__field--hoshi" [(ngModel)]="user.password" id="password" 
+                        type="password" />
+                    <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                        <span class="input__label-content input__label-content--hoshi">Mot de passe</span>
+                    </label>
+                </span>
+            </div>
+
+            <span>{{errorMsg}}</span>
+
+            <button (click)="login()" 
+                class="btn waves-effect waves-light" 
+                 name="action">Login</button>
+        </div>
+
+    </div>
+    
+</div>

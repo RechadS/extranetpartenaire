@@ -1,11 +1,33 @@
-import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+import { routing,
+         appRoutingProviders }  from './app.routing';
+import { PrivateModule }         from './private/private.module';
+import {LoginComponent} from './login/login.component';
 
-import { AppComponent }  from './app.component';
 
 @NgModule({
-  imports: [ BrowserModule ],
-  declarations: [ AppComponent ],
-  bootstrap: [ AppComponent ]
+  declarations: [
+    AppComponent,
+    LoginComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    CommonModule,
+    FormsModule,
+    routing,
+    PrivateModule
+  ],
+  providers: [appRoutingProviders ],
+  entryComponents: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+}

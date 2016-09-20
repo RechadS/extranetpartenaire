@@ -1,0 +1,23 @@
+<div class="row nomargin">
+  <div class="col-md-12">
+    <h1 class="text-center titre-page">Clients (12)</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom de l'entreprise</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Contrats</th>
+          <th>Montant total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.raisonsociale }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.telephone }}</td>
+          <td>{{ client.nbContrats }}</td>
+          <td>{{ client.montantContrats }}€</td>
+        </tr>
+      </tbody>
+    </table>  

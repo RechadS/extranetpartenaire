@@ -1,0 +1,76 @@
+<div class="row nomargin">
+	<div class="col-md-12">
+		<h1 class="text-center titre-page">Déclarer une affaire</h1>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.raisonsociale" id="raisonsociale" 
+			            type="text" />
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Raison Sociale</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.siret" id="siret" 
+			            type="text" />
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">N° SIRET</span>
+			        </label>
+			    </span>
+			</div>
+		</div>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.nom" id="nom" 
+			            type="text" />
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Nom</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi overflow-v">
+			        <select class="cs-select cs-skin-border" [(ngModel)]="declaration.origine" id="origine">
+						<option value="" disabled selected>Origine</option>
+						<option value="AddenDa Software">E-Mail</option>
+						<option value="twitter">Twitter</option>
+						<option value="linkedin">LinkedIn</option>
+					</select>
+			    </span>
+			</div>
+		</div>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.dateContact" id="dateContact" 
+			            type="text" />
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Date du contact</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.dateSignature" id="dateSignature" 
+			            type="text" />
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Date eventuelle signature</span>
+			        </label>
+			    </span>
+			</div>
+		</div>
+
+		<span>{{errorMsg}}</span>
+		<div class="col-md-12 text-center">
+			<button (click)="addDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Déclarer</button>
+		</div>
+		
+	</div>
+</div>
