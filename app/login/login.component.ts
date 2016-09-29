@@ -1,5 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import {AuthenticationService, User} from '../authentication.service';
+import {Router, ActivatedRoute } from '@angular/router';
+import { Observable }       from 'rxjs/Observable';
 
 
 
@@ -21,19 +23,37 @@ declare var inputlabel: any;
 
 export class LoginComponent{
  
-    public user = new User('','');
+    public user = new User( null, '', '', '','', null, null, null);
     public errorMsg = '';
- 
+    public id: number;
+    public isLoggedIn: boolean;
+    
     constructor(
-        private _service:AuthenticationService) {        
+        private _service:AuthenticationService, private router: Router, private route: ActivatedRoute) {        
     }
  
     login() {
-        if(!this._service.login(this.user)){
-            this.errorMsg = 'Failed to login';
-        } else {
-          this.errorMsg = '';
-        }
+        this._service.login(this.user)
+                     .subscribe(
+                       user =>  {
+                          this.user = user; 
+                          this.isLoggedIn = true;
+                          console.log(this.isLoggedIn);
+                          this._service.isLoggedIn = true;
+                          localStorage.setItem("user", JSON.stringify(this.user));
+                                 
+                          this.router.navigate(['/private', 'home'], {relativeTo: this.route});
+                                /*
+                          this._service.getEntreprise(this.user).subscribe(
+                               entreprise =>  {
+                                 this.user.entreprise = entreprise;
+                                 
+                                alert(localStorage.getItem("user"));
+                               },
+                               error =>  this.errorMsg = 'Failed to login');
+                            */
+                       },
+                       error =>  this.errorMsg = 'Failed to login');
     }
 
     ngOnInit() {

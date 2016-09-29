@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,9 +21,10 @@ import {LoginComponent} from './login/login.component';
     CommonModule,
     FormsModule,
     routing,
-    PrivateModule
+    PrivateModule,
+    JsonpModule
   ],
-  providers: [appRoutingProviders ],
+  providers: [appRoutingProviders],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })

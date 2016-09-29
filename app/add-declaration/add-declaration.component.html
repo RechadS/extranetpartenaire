@@ -4,7 +4,7 @@
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.raisonsociale" id="raisonsociale" 
+			        <input class="input__field input__field--hoshi" [(ngModel)]="client.raisonsociale" id="raisonsociale" 
 			            type="text" />
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Raison Sociale</span>
@@ -14,7 +14,7 @@
 
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.siret" id="siret" 
+			        <input class="input__field input__field--hoshi" [(ngModel)]="client.siret" id="siret" 
 			            type="text" />
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">N° SIRET</span>
@@ -25,30 +25,42 @@
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.nom" id="nom" 
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.contact" id="nom" 
 			            type="text" />
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
-			            <span class="input__label-content input__label-content--hoshi">Nom</span>
+			            <span class="input__label-content input__label-content--hoshi">Nom du contact</span>
 			        </label>
 			    </span>
 			</div>
 
+			<!--
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi overflow-v">
 			        <select class="cs-select cs-skin-border" [(ngModel)]="declaration.origine" id="origine">
 						<option value="" disabled selected>Origine</option>
-						<option value="AddenDa Software">E-Mail</option>
-						<option value="twitter">Twitter</option>
-						<option value="linkedin">LinkedIn</option>
+						<option value="AddenDa Software">AddenDa Software</option>
+						<option value="Interne">Interne</option>
 					</select>
 			    </span>
 			</div>
+			-->
+			<div class="col-md-6 text-center">
+			    
+			        <select [(ngModel)]="declaration.origine" id="origine">
+						<option value="" disabled selected>Origine</option>
+						<option value="AddenDa Software">AddenDa Software</option>
+						<option value="twitter">Twitter</option>
+						<option value="linkedin">LinkedIn</option>
+					</select>
+			    
+			</div>
+			
 		</div>
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
-			    <span class="input input--hoshi">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.dateContact" id="dateContact" 
-			            type="text" />
+			    <span class="input input--hoshi input--date">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.datecontact" id="dateContact" 
+			            type="date" />
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Date du contact</span>
 			        </label>
@@ -56,21 +68,55 @@
 			</div>
 
 			<div class="col-md-6 text-center">
-			    <span class="input input--hoshi">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.dateSignature" id="dateSignature" 
-			            type="text" />
+			    <span class="input input--hoshi input--date">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.datesignature" id="dateSignature" 
+			            type="date" />
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Date eventuelle signature</span>
 			        </label>
 			    </span>
 			</div>
 		</div>
+		<div clas="row" style="margin-top: 50px; padding-bottom: 40px;">
+			<div class="col-md-4 text-left">
+				<p style="padding-left: 87px">Logiciels</p>
+			</div>
+			<div class="col-md-4 text-left">
+				<p>Nombre d'accès</p>
+			</div>
+			<div class="col-md-4 text-right">
+				<p>Montant</p>
+			</div>
 
-		<span>{{errorMsg}}</span>
-		<div class="col-md-12 text-center">
-			<button (click)="addDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
-		    type="submit" name="action">Déclarer</button>
 		</div>
+		
+		<ul class="list-commandes">
+			<li *ngFor="let c of commandes">
+				<select class="form-control logiciel-select" id="logiciel"
+                required
+                [(ngModel)]="c.logiciel" name="logiciel" 
+                #logiciel="ngModel" (ngModelChange)="onCommandeChange($event)" >
+		          <option *ngFor="let l of logiciels" [ngValue]="l">{{l.titre}}</option>
+		        </select>
+		        <input [(ngModel)]="c.nbacces" type="number" class="nbacces" name="acces" placeholder="Acces" (ngModelChange)="onCommandeChange($event)"/>
+		        <span class="prix-commande">{{c.prix}}</span>
+			</li>
+		</ul>
+		<button (click)="newCommandelogiciel()" class="btn btn-small" 
+		    type="button" name="addcommande" style="margin-left: 100px;">+ Ajouter un logiciel</button>
+		
+		<div class="col-md-12 text-center">
+			<button (click)="addDeclaration()" *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Déclarer</button>
+		    <div *ngIf="showLoading" style="padding: 25px 80px;">
+		    	<img  src="../../public/img/rolling.svg"  alt="Chargement" height="50px" width="50px" />
+		    </div>
+		   
+		    <p *ngIf="showMessage" class="submit-message">{{successMsg}}</p>
+		</div>
+		
+
+
 		
 	</div>
 </div>
