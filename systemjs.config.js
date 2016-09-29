@@ -26,6 +26,7 @@
       // other libraries
       'rxjs':                       'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
+      'ts-md5': 'npm:ts-md5'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -39,6 +40,9 @@
       'angular2-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
+      },
+      'ts-md5': {
+        main: '/md5.js'
       }
     }
   });

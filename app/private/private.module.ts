@@ -14,7 +14,7 @@ import { ContratComponent } from '../contrat/contrat.component';
 import { ContactComponent } from '../contact/contact.component';
 import { LeftsidebarComponent } from '../leftsidebar/leftsidebar.component'; 
 
-
+import {AddDeclarationService} from '../add-declaration/add-declaration.service';
 import { AuthenticationService } from '../authentication.service';
 import { privateRouting } from './private.routing';
 
@@ -49,7 +49,7 @@ import { privateRouting } from './private.routing';
     ContactComponent
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService, AddDeclarationService
   ]
 })
 export class PrivateModule {}
