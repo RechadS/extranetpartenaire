@@ -13,8 +13,11 @@ import { ClientComponent } from '../client/client.component';
 import { ContratComponent } from '../contrat/contrat.component';
 import { ContactComponent } from '../contact/contact.component';
 import { LeftsidebarComponent } from '../leftsidebar/leftsidebar.component'; 
+import { DeclarationComponent } from '../declaration/declaration.component';
 
 import {AddDeclarationService} from '../add-declaration/add-declaration.service';
+import {DeclarationService} from '../declaration/declaration.service';
+import {ListDeclarationService} from '../list-declaration/list-declaration.service';
 import { AuthenticationService } from '../authentication.service';
 import { privateRouting } from './private.routing';
 
@@ -35,7 +38,8 @@ import { privateRouting } from './private.routing';
     DocumentationComponent,
     ClientComponent,
     ContratComponent,
-    ContactComponent
+    ContactComponent,
+    DeclarationComponent
   ],
   exports: [
     PrivateComponent,
@@ -46,10 +50,11 @@ import { privateRouting } from './private.routing';
     DocumentationComponent,
     ClientComponent,
     ContratComponent,
-    ContactComponent
+    ContactComponent,
+    DeclarationComponent
   ],
   providers: [
-    AuthenticationService, AddDeclarationService
+    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService
   ]
 })
 export class PrivateModule {}

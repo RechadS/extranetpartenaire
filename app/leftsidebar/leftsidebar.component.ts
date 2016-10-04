@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../authentication.service';
+import {AuthenticationService, User} from '../authentication.service';
 
 @Component({
   moduleId: module.id,
@@ -9,10 +9,15 @@ import {AuthenticationService} from '../authentication.service';
 })
 
 export class LeftsidebarComponent implements OnInit {
+  public isAdmin: boolean = false;
+  public user: User = JSON.parse(localStorage.getItem("user"));
 
   constructor(private _service:AuthenticationService) {}
 
   ngOnInit() {
+    if(this.user.role.id == 1 || this.user.role.id == 2) {
+      this.isAdmin = true;
+    }
   }
 
   logout() {

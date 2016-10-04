@@ -1,0 +1,52 @@
+<div class="row nomargin">
+  <div class="col-md-12">
+    <h1 class="text-center titre-page">Déclaration #{{declaration.id}}</h1>
+    <div class="col-md-12">
+    	<div  class="col-md-6">
+    		<p>Client: {{declaration.client.raisonsociale}}</p>
+    	</div>
+    	<div  class="col-md-6">
+    		<p>Siret: {{declaration.client.siret}}</p>
+    	</div>
+    </div>
+    
+    <div class="col-md-12">
+    	<div  class="col-md-6">
+    		<p>Date de contact: {{declaration.datecontact}}</p>
+    	</div>
+    	<div  class="col-md-6">
+    		<p>Date éventuelle de signature: {{declaration.datesignature}}</p>
+    	</div>
+    </div>
+
+    <div class="col-md-12">
+    	<div  class="col-md-6">
+    		<p>Nom du contact: {{declaration.contact}}</p>
+    	</div>
+    	<div  class="col-md-6">
+    		<p>Montant: {{declaration.montant}}</p>
+    	</div>
+    </div>
+    <div class="col-md-12" *ngIf="isAdmin" >
+    	<div  class="col-md-6">
+    		<button (click)="validateDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Valider</button>
+    	</div>
+    	<div  class="col-md-6">
+    		<button (click)="cancelDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Valider</button>
+    	</div>
+    </div>
+    <div class="col-md-12" *ngIf="validate" >
+    	<div  class="col-md-6">
+    		<button (click)="winDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Valider</button>
+    	</div>
+    	<div  class="col-md-6">
+    		<button (click)="lodeDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Valider</button>
+    	</div>
+    </div>
+
+  </div>
+</div>

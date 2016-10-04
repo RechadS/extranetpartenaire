@@ -21,8 +21,12 @@
             <li>
               <a [routerLink]="['/private', 'declarations']" routerLinkActive="active"><img src="../../public/img/listDeclarations-icon.png">Déclarations <!--<span class="badge">5</span>--></a>
             </li>
-            <li>
+            <li *ngIf="!isAdmin">
               <a [routerLink]="['/private', 'client']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Clients 
+              <!--<span class="badge">5</span>--></a>
+            </li>
+            <li *ngIf="isAdmin">
+              <a [routerLink]="['/private', 'client']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Partenaires 
               <!--<span class="badge">5</span>--></a>
             </li>
             <li>

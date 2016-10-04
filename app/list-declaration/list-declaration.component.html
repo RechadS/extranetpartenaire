@@ -1,6 +1,7 @@
 <div class="row nomargin">
   <div class="col-md-12">
-    <h1 class="text-center titre-page">Déclarations en cours (5)</h1>
+    <h1 class="text-center titre-page">Déclarations en cours</h1>
+    <p>{{errorMsg}}</p>
     <table class="table">
       <thead>
         <tr>
@@ -8,11 +9,15 @@
           <th>Client</th>
           <th>Contact</th>
           <th>Montant</th>
-          <th>Fichiers</th>
         </tr>
       </thead>
       <tbody>
-        
+        <tr *ngFor="let declaration of declarations">
+          <td><a [routerLink]="['/private', 'declarations', declaration.id]">#{{ declaration.id }}</a></td>
+          <td>{{ declaration.client.raisonsociale }}</td>
+          <td>{{ declaration.contact }}</td>
+          <td class="text-right">{{ declaration.montant }}</td>
+        </tr>
         
       </tbody>
     </table>  

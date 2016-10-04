@@ -69,32 +69,32 @@ export class AddDeclarationComponent implements OnInit {
                                 this.declaration.statut = "Déclarée";
                                 this.declaration.commandeLogiciels = this.commandes;
                                 this.addService.postDeclaration(this.declaration).subscribe(
-                                declaration => {
-                                  if(declaration != null) {
-                                    console.log(declaration);
+                                  declaration => {
+                                    if(declaration) {
+                                      console.log(declaration);
+                                      this.showLoading = false;
+                                      this.successMsg = "Déclaration effectuée";
+                                      this.showMessage = true;
+                                      this.ref.reattach();
+                                    } else{
+                                      this.showLoading = false;
+                                      console.log("Résultat nul");
+                                      this.successMsg = "La déclaration a échouée";
+                                      this.showMessage = true;
+                                      this.showSubmit = true;
+                                      this.ref.reattach();
+                                    }
+                                  },
+                                  error => {
                                     this.showLoading = false;
-
-                                    this.successMsg = "Déclaration effectuée";
+                                    console.log("Erreur dans le traitement de la déclaration");
+                                    this.successMsg = "La déclaration a échouée"
                                     this.showMessage = true;
-                                    //this.showHide(this.showSubmit, this.showLoading, this.showMessage);
+                                    this.showSubmit = true;
                                     this.ref.reattach();
-                                    //this.declaration = declaration;
-                                  } else{
-                                     this.showLoading = false;
-                                    this.successMsg = "La déclaration a échouée";
-                                    this.showMessage = true;
-                                    this.ref.reattach();
-                                  }
-                                 
-                                  
-                                },
-                                error => {
-                                  this.showLoading = false;
-                                  this.successMsg = "La déclaration a échouée"
-                                  this.showMessage = true;
-                                  this.showSubmit = true;
-                                  this.ref.reattach();
-                                  });
+                                    }
+                                );
+                                
                               } else {
                                 this.showLoading = false;
                                 this.successMsg = "Une affaire concernant cette entreprise a déjà été déclarée";
