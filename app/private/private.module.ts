@@ -10,6 +10,7 @@ import { AddDeclarationComponent } from '../add-declaration/add-declaration.comp
 import { ListDeclarationComponent } from '../list-declaration/list-declaration.component';
 import { DocumentationComponent } from '../documentation/documentation.component';
 import { ClientComponent } from '../client/client.component';
+import { PartenaireComponent } from '../partenaire/partenaire.component';
 import { ContratComponent } from '../contrat/contrat.component';
 import { ContactComponent } from '../contact/contact.component';
 import { LeftsidebarComponent } from '../leftsidebar/leftsidebar.component'; 
@@ -37,6 +38,7 @@ import { privateRouting } from './private.routing';
     ListDeclarationComponent,
     DocumentationComponent,
     ClientComponent,
+    PartenaireComponent,
     ContratComponent,
     ContactComponent,
     DeclarationComponent
@@ -49,6 +51,7 @@ import { privateRouting } from './private.routing';
     ListDeclarationComponent,
     DocumentationComponent,
     ClientComponent,
+    PartenaireComponent,
     ContratComponent,
     ContactComponent,
     DeclarationComponent

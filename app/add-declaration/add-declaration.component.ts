@@ -23,7 +23,7 @@ export class Declaration {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddDeclarationComponent implements OnInit {
-  public client = new Entreprise(null, '', '', '', null);
+  public client = new Entreprise(null, '', '', '', '', '', null);
   public user: User = JSON.parse(localStorage.getItem("user"));
   public declaration = new Contrat(null, null, null, '', '',null, null, null, '', this.user, this.client, null, null);
   public submitMsg: string;

@@ -27,25 +27,48 @@
     		<p>Montant: {{declaration.montant}}</p>
     	</div>
     </div>
-    <div class="col-md-12" *ngIf="isAdmin" >
-    	<div  class="col-md-6">
-    		<button (click)="validateDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
+    <div class="col-md-12">
+    	<table class="table">
+      <thead>
+        <tr>
+          <th>Logiciel</th>
+          <th>Nombre d'accès</th>
+          <th>Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of declaration.commandeLogiciels">
+          <td>{{ commande.logiciel.titre }}</td>
+          <td>{{ commande.nbacces }}</td>
+          <td>{{ commande.prix }} €</td>
+        </tr>
+      </tbody>
+    </table>  
+    	
+    </div>
+    
+    <div class="col-md-12" *ngIf="isadmin" >
+    	<div  class="col-md-6 text-center" *ngIf="!validate">
+    		<button (click)="updatesatut('Validée')" class="btn btn-4 btn-4c icon-arrow-right" 
 		    type="submit" name="action">Valider</button>
     	</div>
-    	<div  class="col-md-6">
-    		<button (click)="cancelDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
-		    type="submit" name="action">Valider</button>
+    	<div  class="col-md-6 text-left" *ngIf="!validate">
+    		<button (click)="updatesatut('Refusée')" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Refuser</button>
     	</div>
     </div>
     <div class="col-md-12" *ngIf="validate" >
-    	<div  class="col-md-6">
-    		<button (click)="winDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
-		    type="submit" name="action">Valider</button>
+    	<div  class="col-md-6 text-center">
+    		<button (click)="updatesatut('Gagnée')" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Gagnée</button>
     	</div>
-    	<div  class="col-md-6">
-    		<button (click)="lodeDeclaration()" class="btn btn-4 btn-4c icon-arrow-right" 
-		    type="submit" name="action">Valider</button>
+    	<div  class="col-md-6 text-left">
+    		<button (click)="updatesatut('Perdue')" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Perdue</button>
     	</div>
+    </div>
+    <div class="col-md-12 text-center" >
+    	<p>{{msg}}</p>
     </div>
 
   </div>

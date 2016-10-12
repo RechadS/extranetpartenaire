@@ -10,6 +10,7 @@ import { DocumentationComponent } from '../documentation/documentation.component
 import { ClientComponent } from '../client/client.component';
 import { ContratComponent } from '../contrat/contrat.component';
 import { ContactComponent } from '../contact/contact.component';
+import { PartenaireComponent } from '../partenaire/partenaire.component';
 
 import { AuthGuard } from '../authentication-guard.service';
 
@@ -29,6 +30,7 @@ export const privateroutes: Routes  = [
 			{ path: 'declarations/:id', component: DeclarationComponent},
 			{ path: 'documentation', component: DocumentationComponent},
 			{ path: 'client', component: ClientComponent},
+			{ path: 'partenaires', component: PartenaireComponent},
 			{ path: 'contact', component: ContactComponent}
 		],
 	}

@@ -14,8 +14,8 @@ export class Role {
 }
 
 export class Entreprise {
-  constructor(public id: number, public raisonsociale: string, public siret: string, public role: string,
-    public users: User[]) { }
+  constructor(public id: number, public raisonsociale: string, public siret: string, public email: String, public telephone: String,
+    public role: string, public users: User[]) { }
 }
 
 export class Contrat {

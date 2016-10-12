@@ -7,6 +7,8 @@ const clientUrl = (siret: string, raison: string) => `http://localhost:4567/clie
 const declarationsUrl = (id: number) => 
           `http://localhost:4567/contrats/${id}`;
 
+const statutUrl = `http://localhost:4567/declaration/statut`;
+
 
 @Injectable()
 export class DeclarationService {
@@ -22,6 +24,16 @@ export class DeclarationService {
 
   getDeclaration(id: number): Observable<Contrat>{
   	return this.http.get(declarationsUrl(id)).map(this.extractData)        
+            .catch(this.handleError);
+  }
+
+  putStatut(declaration: Contrat): Observable<Boolean>{
+    let body = JSON.stringify(declaration);
+    
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(statutUrl, body, options).map(this.extractData)        
             .catch(this.handleError);
   }
 
