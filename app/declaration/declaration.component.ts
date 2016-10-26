@@ -10,13 +10,16 @@ import {DeclarationService} from './declaration.service';
   styleUrls: ['declaration.component.css']
 })
 export class DeclarationComponent implements OnInit {
+  public title: string = "";
 	public client = new Entreprise(null, '', '', '', '', '', null);
 	public user: User = JSON.parse(localStorage.getItem("user"));
-	public declaration: Contrat = new Contrat(null, null, null, '', '',null, null, null, '', null, this.client, null, null);;
+	public declaration: Contrat = new Contrat(null, null, null, '', '',null, null, null, '', null, this.client, null, null);
 	private sub: any;
-	public validate: boolean = false;
+	public tovalidate: boolean = false;
+  public validate: boolean = false;
+  public win: boolean = false;
 	public isadmin: boolean = false;
-	public msg: String = "";
+	public msg: string = "";
 
   constructor(private ref: ChangeDetectorRef, private route: ActivatedRoute, private declarationService: DeclarationService) {
   	this.sub = this.route.params.subscribe(params => {
@@ -26,10 +29,19 @@ export class DeclarationComponent implements OnInit {
           .subscribe(declaration => {
           	this.declaration = declaration;
           	this.declaration.commandeLogiciels =declaration.commandeLogiciels;
-          	console.log(this.declaration.commandeLogiciels)
+          	
+            if(this.declaration.statut == "Déclarée") {
+              this.tovalidate = true;
+            }
           	if(this.declaration.statut == "Validée") {
-		    	this.validate = true;
-		    }
+    		    	this.validate = true;
+    		    }
+            if(this.declaration.statut == "Gagnée") {
+              this.title = "Contrat";
+              this.win = true;
+            } else{
+              this.title = "Déclaration";
+            }
           	console.log(declaration);
           },
           error => {

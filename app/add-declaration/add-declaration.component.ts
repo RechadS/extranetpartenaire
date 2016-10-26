@@ -25,7 +25,7 @@ export class Declaration {
 export class AddDeclarationComponent implements OnInit {
   public client = new Entreprise(null, '', '', '', '', '', null);
   public user: User = JSON.parse(localStorage.getItem("user"));
-  public declaration = new Contrat(null, null, null, '', '',null, null, null, '', this.user, this.client, null, null);
+  public declaration = new Contrat(null, null, null, '', '',null, null, 0, '', this.user, this.client, null, null);
   public submitMsg: string;
   public commandes: Array<CommandeLogiciel> = [];
   public commande: CommandeLogiciel = new CommandeLogiciel(null, 1, 0, null, null, null);
@@ -53,8 +53,8 @@ export class AddDeclarationComponent implements OnInit {
   }
 
   newCommandelogiciel(){
-    this.nbCommande++;
-    this.commandes.push(new CommandeLogiciel(null, 1, 0, null, null, null));
+    let newcommande : CommandeLogiciel = new CommandeLogiciel(null, 1, 0, null, null, null);
+    this.commandes.push(newcommande);
   }
   
   addDeclaration(){
@@ -116,8 +116,10 @@ export class AddDeclarationComponent implements OnInit {
   onCommandeChange(event: Event){
     this.declaration.montant = 0;
     this.commandes.forEach( commande => {
+      if(commande.logiciel != null) {
         commande.prix = commande.logiciel.prix + (commande.logiciel.prixacces * commande.nbacces) - commande.logiciel.prixacces;
         this.declaration.montant += commande.prix;
+      }
       });
   }
 

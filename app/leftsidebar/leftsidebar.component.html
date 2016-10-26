@@ -22,7 +22,7 @@
               <a [routerLink]="['/private', 'declarations']" routerLinkActive="active"><img src="../../public/img/listDeclarations-icon.png">Déclarations <!--<span class="badge">5</span>--></a>
             </li>
             <li *ngIf="!isAdmin">
-              <a [routerLink]="['/private', 'client']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Clients 
+              <a [routerLink]="['/private', 'clients']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Clients 
               <!--<span class="badge">5</span>--></a>
             </li>
             <li *ngIf="isAdmin">
@@ -32,7 +32,7 @@
             <li>
               <a [routerLink]="['/private', 'documentation']" routerLinkActive="active"><img src="../../public/img/documentation-icon.png">Documentation</a></li>
             <!--<li><a href="#"><img src="../../public/img/tutorials-icon.png">Tutoriels</a></li>-->
-            <li><a [routerLink]="['/private', 'contact']" routerLinkActive="active"><img src="../../public/img/contact-icon.png">Contact</a></li>
+            <!--<li><a [routerLink]="['/private', 'contact']" routerLinkActive="active"><img src="../../public/img/contact-icon.png">Contact</a></li>-->
             <li><a (click)="logout()" href="#"><img src="../../public/img/deconnexion-icon.png">Déconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->

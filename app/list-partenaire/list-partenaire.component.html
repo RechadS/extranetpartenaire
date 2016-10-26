@@ -1,0 +1,27 @@
+<div class="row nomargin">
+  <div class="col-md-12">
+    <h1 class="text-center titre-page">Partenaires</h1>
+    <a [routerLink]="['/private', 'partenaires-add']" routerLinkActive="active">Ajouter un partenaire</a>
+    <table class="table" >
+      <thead>
+        <tr>
+          <th>Nom de l'entreprise</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Contrats</th>
+          <th>Montant total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let partenaire of partenaires">
+          <td><a [routerLink]="['/private', 'partenaires', partenaire.id]">{{ partenaire.raisonsociale }}</a></td>
+          <td>{{ partenaire.email }}</td>
+          <td>{{ partenaire.telephone }}</td>
+          <td *ngIf="partenaire.contrats != null">{{ partenaire.contrats.length }}</td>
+          <td *ngIf="partenaire.contrats == null">0</td>
+          <td>{{ partenaire.montant }} €</td>
+        </tr>
+      </tbody>
+    </table>  
+  </div>
+</div>

@@ -9,7 +9,7 @@ button.btn.btn-small {
     
 
 .list-commandes li{
-	padding: 20px 60px;
+	padding: 18px 60px;
 }
 
 .list-commandes li .logiciel-select{
@@ -23,4 +23,26 @@ button.btn.btn-small {
 
 .list-commandes li .prix-commande{
     float: right;
+}
+
+.input--hoshi select{
+	padding: 0.85em 0.15em;
+    width: 100%;
+    background: transparent;
+    color: #595F6E;
+}
+
+.list-group {
+    margin-bottom: 0px;
+}
+
+.btn-add-cmd{
+	margin-left: 78px;
+}
+
+.montanttotal{
+	text-align: right;
+    padding-right: 74px;
+    margin-top: 15px;
+    margin-bottom: 0;
 }

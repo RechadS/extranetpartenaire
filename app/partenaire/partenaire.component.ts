@@ -1,38 +1,54 @@
-import { Component } from '@angular/core';
-import {Entreprise, Contrat, User} from '../authentication.service';
-
-export class Client {
-  constructor(public id: number, public raisonsociale: string, public email: string,
-    public telephone: string, public nbContrats: number, public montantContrats: number) { }
-}
-
-export class Partenaire extends Entreprise{
-  constructor(public id: number, public raisonsociale: string, public siret: string, public email: String,
-    public telephone: String, public role: string, public users: User[], public contrats: Contrat[], public montant: number ) {
-    super(id, raisonsociale, siret, email, telephone, role, users);
-    this.contrats = contrats;
-    this.montant = montant;
-    }
-}
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {Http, RequestOptions, Headers, Response} from '@angular/http';
+import {AuthenticationService, Entreprise, Contrat, User} from '../authentication.service';
+import {PartenaireService} from './partenaire.service';
+import {Partenaire} from '../list-partenaire/list-partenaire.component';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-client',
+  selector: 'partenaire',
   templateUrl: 'partenaire.component.html',
   styleUrls: ['partenaire.component.css']
 })
 
-export class PartenaireComponent {
+export class PartenaireComponent implements OnInit {
 
-  partenaires = [
-    new Partenaire(1,'Aliquet Limited', '123456789', 'johndoe@example.com', '01 47 85 43 64', 'Partenaire', null, null, 15200),
-    new Partenaire(2,'Eleifend Foundation','123456789', 'litora@est.com', '01 98 63 24 85', 'Partenaire', null, null, 15200),
-    new Partenaire(3,'Dapibus Industries','123456789', 'malesuada@mattis.com', '03 54 85 21 63', 'Partenaire', null, null, 15200),
-    new Partenaire(4,'Condimentum','123456789', 'vel.quam@dolor.net', '01 96 45 85 42', 'Partenaire', null, null, 15200),
-    new Partenaire(5,'Suspendisse','123456789', 'auctor@mauris.net', '04 25 47 62 85', 'Partenaire', null, null, 15200),
-    new Partenaire(6,'Volutpat','123456789', 'quis@ultricessitamet.net', '01 94 85 46 37', 'Partenaire', null, null, 15200)
-  ];
+	public contrats : Contrat[];
+  public partenaire: Partenaire = new Partenaire(null, "", "", "", "", "", null, null, 0);
+	public user: User = JSON.parse(localStorage.getItem("user"));
+  private sub: any;
+	public listExist :boolean = false;
+	public errorMsg : String;
 
 
+	constructor(private partenaireService: PartenaireService, private route: ActivatedRoute, private http: Http, private auth: AuthenticationService) {
+    this.sub = this.route.params.subscribe(params => {
+    this.partenaireService.getPartenaire(+params['id']).subscribe(
+                       partenaire =>  {this.partenaire = partenaire;},
+                       error => {this.errorMsg = "Partenaire Introuvable";}
+                       );
+		this.partenaireService.getListContrats(+params['id']).subscribe(
+                       contrats =>  {
+                       	if(contrats != null && contrats.length>0) {
+                           console.log(contrats.length);
+                       		this.listExist = true;
+                       		this.contrats = contrats;
+                       	}else{
+                       		this.errorMsg = "Aucun contrat en cours"
+                       	}
+                       	
+                       }
+                       	,
+                       error => {
+                         this.errorMsg = ('Les contrats n\'ont pas pu être chargés');
+                       }
+                       );
+    });
+	}
+
+	ngOnInit() {
+
+	}
 
 }

@@ -1,0 +1,87 @@
+<div class="row nomargin">
+	<div class="col-md-12">
+		<h1 class="text-center titre-page">Ajouter un utilisateur</h1>
+		<form>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="user.nom" id="nom" 
+			            type="text" name="nom" required/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Nom</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="user.prenom" id="prenom" 
+			            type="text" name="prenom" required/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Prénom</span>
+			        </label>
+			    </span>
+			</div>
+		</div>
+		<div class="row nomargin">
+			
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="user.email" id="email" 
+			            type="text" name="email" required/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Email</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <select class="form-control logiciel-select" id="role"
+	                required [(ngModel)]="user.role" name="role" #role="ngModel" >
+			          <option *ngFor="let role of roles" [ngValue]="role">{{role.libelle}}</option>
+			        </select>
+			    </span>
+			</div>
+			
+		</div>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="user.password" id="password" 
+			            type="text" name="password" required/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Mot de passe</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="checkpassword" id="passwordcheck" 
+			            type="text" name="passwordcheck" required/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Confirmation du mot de passe</span>
+			        </label>
+			    </span>
+			</div>
+		</div>
+
+		
+
+		
+		<div class="col-md-12 text-center">
+			<button (click)="addUser()" *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Ajouter</button>
+		    <div *ngIf="showLoading" style="padding: 25px 80px;">
+		    	<img  src="../../public/img/rolling.svg"  alt="Chargement" height="50px" width="50px" />
+		    </div>
+		   
+		    <p *ngIf="showMessage" class="submit-message">{{successMsg}}</p>
+		</div>
+		</form>
+
+
+		
+	</div>
+</div>

@@ -1,11 +1,12 @@
 <div class="row nomargin">
 	<div class="col-md-12">
 		<h1 class="text-center titre-page">Déclarer une affaire</h1>
+		<form>
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
 			        <input class="input__field input__field--hoshi" [(ngModel)]="client.raisonsociale" id="raisonsociale" 
-			            type="text" />
+			            type="text" name="raisonsociale"/>
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Raison Sociale</span>
 			        </label>
@@ -15,7 +16,7 @@
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
 			        <input class="input__field input__field--hoshi" [(ngModel)]="client.siret" id="siret" 
-			            type="text" />
+			            type="text" name="siret"/>
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">N° SIRET</span>
 			        </label>
@@ -25,8 +26,8 @@
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.contact" id="nom" 
-			            type="text" />
+			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.contact" id="contact" 
+			            type="text" name="contact"/>
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Nom du contact</span>
 			        </label>
@@ -45,14 +46,13 @@
 			</div>
 			-->
 			<div class="col-md-6 text-center">
-			    
-			        <select [(ngModel)]="declaration.origine" id="origine">
+			    <span class="input input--hoshi">
+			        <select [(ngModel)]="declaration.origine" id="origine" name="origine">
 						<option value="" disabled selected>Origine</option>
 						<option value="AddenDa Software">AddenDa Software</option>
-						<option value="twitter">Twitter</option>
-						<option value="linkedin">LinkedIn</option>
+						<option value="Interne">Interne</option>
 					</select>
-			    
+			    </span>
 			</div>
 			
 		</div>
@@ -60,7 +60,7 @@
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi input--date">
 			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.datecontact" id="dateContact" 
-			            type="date" />
+			            type="date" name="datecontact"/>
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Date du contact</span>
 			        </label>
@@ -70,40 +70,58 @@
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi input--date">
 			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.datesignature" id="dateSignature" 
-			            type="date" />
+			            type="date" name="datesignature"/>
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Date eventuelle signature</span>
 			        </label>
 			    </span>
 			</div>
 		</div>
-		<div clas="row" style="margin-top: 50px; padding-bottom: 40px;">
-			<div class="col-md-4 text-left">
+		<div class="row" style="margin-top: 50px; padding-bottom: 20px;">
+			<div class="col-md-4 col-xs-4 text-left">
 				<p style="padding-left: 87px">Logiciels</p>
 			</div>
-			<div class="col-md-4 text-left">
+			<div class="col-md-4 col-xs-4 text-center">
 				<p>Nombre d'accès</p>
 			</div>
-			<div class="col-md-4 text-right">
+			<div class="col-md-4 col-xs-4 text-center">
 				<p>Montant</p>
 			</div>
-
+		</div>
+		<div  class="row">
+		<div class="col-md-12">
+			<ul class="list-commandes list-group">
+				<li *ngFor="let c of commandes; let i = index" class="list-group col-md-12">
+				<div class="col-md-4 col-xs-4 text-left">
+					<select class="form-control logiciel-select" id="logiciel"
+	                required
+	                [(ngModel)]="c.logiciel" name="logiciel{{i}}" 
+	                #logiciel="ngModel" (ngModelChange)="onCommandeChange($event)" >
+			          <option *ngFor="let l of logiciels" [ngValue]="l">{{l.titre}}</option>
+			        </select>
+				</div>
+				<div class="col-md-4 col-xs-4 text-left">
+					<input [(ngModel)]="c.nbacces" type="number" class="nbacces" name="nbacces" placeholder="Acces" (ngModelChange)="onCommandeChange($event)"/>
+				</div>
+				<div class="col-md-4 col-xs-4 text-right">
+					<span class="prix-commande">{{c.prix}} €</span>
+				</div>
+			        
+			        
+				</li>
+			</ul>
+		</div>
+			
+		<div class="col-md-12">
+			<p class="montanttotal">Montant total: {{declaration.montant}} €</p>
+		</div>
+		<div class="col-md-12">
+			<button (click)="newCommandelogiciel()" class="btn btn-small btn-add-cmd" 
+		    type="button" name="addcommande">+ Ajouter un logiciel</button>
 		</div>
 		
-		<ul class="list-commandes">
-			<li *ngFor="let c of commandes">
-				<select class="form-control logiciel-select" id="logiciel"
-                required
-                [(ngModel)]="c.logiciel" name="logiciel" 
-                #logiciel="ngModel" (ngModelChange)="onCommandeChange($event)" >
-		          <option *ngFor="let l of logiciels" [ngValue]="l">{{l.titre}}</option>
-		        </select>
-		        <input [(ngModel)]="c.nbacces" type="number" class="nbacces" name="acces" placeholder="Acces" (ngModelChange)="onCommandeChange($event)"/>
-		        <span class="prix-commande">{{c.prix}}</span>
-			</li>
-		</ul>
-		<button (click)="newCommandelogiciel()" class="btn btn-small" 
-		    type="button" name="addcommande" style="margin-left: 100px;">+ Ajouter un logiciel</button>
+		</div>
+		
 		
 		<div class="col-md-12 text-center">
 			<button (click)="addDeclaration()" *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
@@ -114,7 +132,7 @@
 		   
 		    <p *ngIf="showMessage" class="submit-message">{{successMsg}}</p>
 		</div>
-		
+		</form>
 
 
 		

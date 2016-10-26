@@ -1,6 +1,6 @@
 <div class="row nomargin">
   <div class="col-md-12">
-    <h1 class="text-center titre-page">Déclaration #{{declaration.id}}</h1>
+    <h1 class="text-center titre-page">{{title}} #{{declaration.id}}</h1>
     <div class="col-md-12">
     	<div  class="col-md-6">
     		<p>Client: {{declaration.client.raisonsociale}}</p>
@@ -24,7 +24,7 @@
     		<p>Nom du contact: {{declaration.contact}}</p>
     	</div>
     	<div  class="col-md-6">
-    		<p>Montant: {{declaration.montant}}</p>
+    		<p>Montant: {{declaration.montant}} €</p>
     	</div>
     </div>
     <div class="col-md-12">
@@ -48,16 +48,16 @@
     </div>
     
     <div class="col-md-12" *ngIf="isadmin" >
-    	<div  class="col-md-6 text-center" *ngIf="!validate">
+    	<div  class="col-md-6 text-center" *ngIf="tovalidate">
     		<button (click)="updatesatut('Validée')" class="btn btn-4 btn-4c icon-arrow-right" 
 		    type="submit" name="action">Valider</button>
     	</div>
-    	<div  class="col-md-6 text-left" *ngIf="!validate">
+    	<div  class="col-md-6 text-left" *ngIf="tovalidate">
     		<button (click)="updatesatut('Refusée')" class="btn btn-4 btn-4c icon-arrow-right" 
 		    type="submit" name="action">Refuser</button>
     	</div>
     </div>
-    <div class="col-md-12" *ngIf="validate" >
+    <div class="col-md-12" *ngIf="validate && !win" >
     	<div  class="col-md-6 text-center">
     		<button (click)="updatesatut('Gagnée')" class="btn btn-4 btn-4c icon-arrow-right" 
 		    type="submit" name="action">Gagnée</button>

@@ -86,7 +86,7 @@ export class AuthenticationService {
    
   logout() {
     localStorage.removeItem("user");
-    this.router.navigate(['login']);
+    //this.router.navigate(['login']);
   }
  
   login(user: User): Observable<User>{

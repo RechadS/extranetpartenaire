@@ -1,0 +1,63 @@
+<div class="row nomargin">
+	<div class="col-md-12">
+		<h1 class="text-center titre-page">Ajouter un partenaire</h1>
+		<form>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="partenaire.raisonsociale" id="raisonsociale" 
+			            type="text" name="raisonsociale"/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Raison Sociale</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="partenaire.siret" id="siret" 
+			            type="text" name="siret"/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">N° SIRET</span>
+			        </label>
+			    </span>
+			</div>
+		</div>
+		<div class="row nomargin">
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="partenaire.email" id="nom" 
+			            type="text" name="email"/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Email</span>
+			        </label>
+			    </span>
+			</div>
+
+			<div class="col-md-6 text-center">
+			    <span class="input input--hoshi">
+			        <input class="input__field input__field--hoshi" [(ngModel)]="partenaire.telephone" id="nom" 
+			            type="text" name="telephone"/>
+			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+			            <span class="input__label-content input__label-content--hoshi">Téléphone</span>
+			        </label>
+			    </span>
+			</div>
+			
+		</div>
+		
+		<div class="col-md-12 text-center">
+			<button (click)="addPartenaire()" *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
+		    type="submit" name="action">Ajouter</button>
+		    <div *ngIf="showLoading" style="padding: 25px 80px;">
+		    	<img  src="../../public/img/rolling.svg"  alt="Chargement" height="50px" width="50px" />
+		    </div>
+		   
+		    <p *ngIf="showMessage" class="submit-message">{{successMsg}}</p>
+		</div>
+		</form>
+
+
+		
+	</div>
+</div>

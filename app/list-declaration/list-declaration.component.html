@@ -2,12 +2,13 @@
   <div class="col-md-12">
     <h1 class="text-center titre-page">Déclarations en cours</h1>
     <p>{{errorMsg}}</p>
-    <table class="table">
+    <table class="table" *ngIf="listExist">
       <thead>
         <tr>
           <th>Contrat</th>
           <th>Client</th>
           <th>Contact</th>
+          <th>Statut</th>
           <th>Montant</th>
         </tr>
       </thead>
@@ -16,6 +17,7 @@
           <td><a [routerLink]="['/private', 'declarations', declaration.id]">#{{ declaration.id }}</a></td>
           <td>{{ declaration.client.raisonsociale }}</td>
           <td>{{ declaration.contact }}</td>
+          <td>{{ declaration.statut }}</td>
           <td class="text-right">{{ declaration.montant }}</td>
         </tr>
         

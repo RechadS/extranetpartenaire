@@ -1,0 +1,26 @@
+button.btn.btn-small {
+    padding: 15px;
+    text-transform: none;
+}
+
+.list-commandes{
+	list-style: none;
+}
+    
+
+.list-commandes li{
+	padding: 20px 60px;
+}
+
+.list-commandes li .logiciel-select{
+	width: 300px;
+    float: left;
+}
+
+.list-commandes li .nbacces{
+	margin-left: 74px;
+}
+
+.list-commandes li .prix-commande{
+    float: right;
+}

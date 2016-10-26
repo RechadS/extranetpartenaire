@@ -10,15 +10,26 @@ import { AddDeclarationComponent } from '../add-declaration/add-declaration.comp
 import { ListDeclarationComponent } from '../list-declaration/list-declaration.component';
 import { DocumentationComponent } from '../documentation/documentation.component';
 import { ClientComponent } from '../client/client.component';
-import { PartenaireComponent } from '../partenaire/partenaire.component';
+import { ListPartenaireComponent } from '../list-partenaire/list-partenaire.component';
 import { ContratComponent } from '../contrat/contrat.component';
 import { ContactComponent } from '../contact/contact.component';
 import { LeftsidebarComponent } from '../leftsidebar/leftsidebar.component'; 
 import { DeclarationComponent } from '../declaration/declaration.component';
+import { PartenaireComponent } from '../partenaire/partenaire.component';
+import { AddPartenaireComponent } from '../add-partenaire/add-partenaire.component';
+import { ListUserComponent } from '../list-user/list-user.component';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { ListClientComponent } from '../list-client/list-client.component';
 
 import {AddDeclarationService} from '../add-declaration/add-declaration.service';
+import { AddPartenaireService } from '../add-partenaire/add-partenaire.service';
+import { AddUserService } from '../add-user/add-user.service';
 import {DeclarationService} from '../declaration/declaration.service';
 import {ListDeclarationService} from '../list-declaration/list-declaration.service';
+import {PartenaireService} from '../partenaire/partenaire.service';
+import {ListPartenaireService} from '../list-partenaire/list-partenaire.service';
+import { ClientService } from '../client/client.service';
+import { ListClientService } from '../list-client/list-client.service';
 import { AuthenticationService } from '../authentication.service';
 import { privateRouting } from './private.routing';
 
@@ -38,10 +49,15 @@ import { privateRouting } from './private.routing';
     ListDeclarationComponent,
     DocumentationComponent,
     ClientComponent,
+    AddPartenaireComponent,
     PartenaireComponent,
+    ListPartenaireComponent,
     ContratComponent,
     ContactComponent,
-    DeclarationComponent
+    DeclarationComponent,
+    ListUserComponent,
+    AddUserComponent,
+    ListClientComponent
   ],
   exports: [
     PrivateComponent,
@@ -51,13 +67,19 @@ import { privateRouting } from './private.routing';
     ListDeclarationComponent,
     DocumentationComponent,
     ClientComponent,
+    AddPartenaireComponent,
     PartenaireComponent,
+    ListPartenaireComponent,
     ContratComponent,
     ContactComponent,
-    DeclarationComponent
+    DeclarationComponent,
+    ListUserComponent,
+    AddUserComponent,
+    ListClientComponent
   ],
   providers: [
-    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService
+    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService,
+    ListPartenaireService, PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService
   ]
 })
 export class PrivateModule {}

@@ -1,25 +1,26 @@
 <div class="row nomargin">
   <div class="col-md-12">
-    <h1 class="text-center titre-page">Partenaires</h1>
-    <table class="table">
+    <h1 class="text-center titre-page">{{partenaire.raisonsociale}}</h1>
+    <p>{{errorMsg}}</p>
+    <table class="table" *ngIf="listExist">
       <thead>
         <tr>
-          <th>Nom de l'entreprise</th>
-          <th>Email</th>
-          <th>Téléphone</th>
-          <th>Contrats</th>
-          <th>Montant total</th>
+          <th>Contrat</th>
+          <th>Client</th>
+          <th>Responsable</th>
+          <th>Contact</th>
+          <th>Montant</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let partenaire of partenaires">
-          <td>{{ partenaire.raisonsociale }}</td>
-          <td>{{ partenaire.email }}</td>
-          <td>{{ partenaire.telephone }}</td>
-          <td *ngIf="partenaire.contrats != null">{{ partenaire.contrats.lentgh }}</td>
-          <td *ngIf="partenaire.contrats == null">0</td>
-          <td>{{ partenaire.montant }} €</td>
+        <tr *ngFor="let contrat of contrats">
+          <td><a [routerLink]="['/private', 'contrat', contrat.id]">#{{ contrat.id }}</a></td>
+          <td>{{ contrat.client.raisonsociale }}</td>
+          <td>{{ contrat.user.prenom }} {{ contrat.user.nom }}</td>
+          <td>{{ contrat.contact }}</td>
+          <td class="text-right">{{ contrat.montant }}</td>
         </tr>
+        
       </tbody>
     </table>  
   </div>

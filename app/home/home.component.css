@@ -1,8 +1,22 @@
 .block-charte{
 	padding: 20px;
 	display: inline-block;
+	margin-top: 50px;
 }
 
 .nomargin{
 	margin: 0 0 0 0;
+}
+
+p {
+    margin: 0px 0 15px;
+}
+
+.signature{
+	margin-top: 25px;
+}
+
+.charteValeur-titre{
+	color: #f29400;
+	margin-bottom: 10px;
 }

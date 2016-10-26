@@ -14,23 +14,26 @@ export class ListDeclarationComponent implements OnInit {
 
 	public declarations : Contrat[];
 	public user: User = JSON.parse(localStorage.getItem("user"));
+  public isadmin : boolean =false;
 	public listExist :boolean = false;
 	public errorMsg : String;
 
 	constructor(private listService: ListDeclarationService, private http: Http, private auth: AuthenticationService) {
 		this.listService.getListDeclarations(this.user).subscribe(
                        declarations =>  {
-                       	if(declarations != null) {
+                       	if(declarations != null && declarations.length > 0) {
                        		this.listExist = true;
                        		this.declarations = declarations;
                        	}else{
                        		this.errorMsg = "Aucune déclaration en cours"
                        	}
-                       	
                        }
                        	,
                        error => console.log('Les déclarations n\'ont pas pu être chargés')
                        );
+    if(this.user.role.id == 1 || this.user.role.id == 2){
+      this.isadmin = true;
+    }
 	}
 
 	ngOnInit() {
