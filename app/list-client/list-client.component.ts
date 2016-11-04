@@ -38,7 +38,6 @@ export class ListClientComponent {
                               this.clients[i].montant = 0;
                               
                               if(this.clients[i].contrats != null) {
-                                console.log(this.clients[i].contrats.length);
                                 for (var j = 0; j < this.clients[i].contrats.length; ++j) {
                                   if(this.clients[i].contrats[j].montant != null) {
 

@@ -21,6 +21,7 @@ import { ListUserComponent } from '../list-user/list-user.component';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { ListClientComponent } from '../list-client/list-client.component';
 
+
 import {AddDeclarationService} from '../add-declaration/add-declaration.service';
 import { AddPartenaireService } from '../add-partenaire/add-partenaire.service';
 import { AddUserService } from '../add-user/add-user.service';
@@ -30,6 +31,7 @@ import {PartenaireService} from '../partenaire/partenaire.service';
 import {ListPartenaireService} from '../list-partenaire/list-partenaire.service';
 import { ClientService } from '../client/client.service';
 import { ListClientService } from '../list-client/list-client.service';
+import { ContactService } from '../contact/contact.service';
 import { AuthenticationService } from '../authentication.service';
 import { privateRouting } from './private.routing';
 
@@ -78,8 +80,8 @@ import { privateRouting } from './private.routing';
     ListClientComponent
   ],
   providers: [
-    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService,
-    ListPartenaireService, PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService
+    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService, ListPartenaireService,
+    PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService, ContactService
   ]
 })
 export class PrivateModule {}

@@ -1,7 +1,7 @@
 <div class="row nomargin">
 	<div class="col-md-12">
 		<h1 class="text-center titre-page">Déclarer une affaire</h1>
-		<form>
+		<form (ngSubmit)="addDeclaration()">
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
@@ -34,17 +34,6 @@
 			    </span>
 			</div>
 
-			<!--
-			<div class="col-md-6 text-center">
-			    <span class="input input--hoshi overflow-v">
-			        <select class="cs-select cs-skin-border" [(ngModel)]="declaration.origine" id="origine">
-						<option value="" disabled selected>Origine</option>
-						<option value="AddenDa Software">AddenDa Software</option>
-						<option value="Interne">Interne</option>
-					</select>
-			    </span>
-			</div>
-			-->
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi">
 			        <select [(ngModel)]="declaration.origine" id="origine" name="origine">
@@ -58,21 +47,19 @@
 		</div>
 		<div class="row nomargin">
 			<div class="col-md-6 text-center">
-			    <span class="input input--hoshi input--date">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.datecontact" id="dateContact" 
-			            type="date" name="datecontact"/>
-			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+				<span class="input input--hoshi input--date">
+				<input type='text' id="dateContact" name="datecontact" class="input__field input__field--hoshi"/>
+	             <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
 			            <span class="input__label-content input__label-content--hoshi">Date du contact</span>
-			        </label>
-			    </span>
+			        </label>   
+	            </span>
 			</div>
 
 			<div class="col-md-6 text-center">
 			    <span class="input input--hoshi input--date">
-			        <input class="input__field input__field--hoshi" [(ngModel)]="declaration.datesignature" id="dateSignature" 
-			            type="date" name="datesignature"/>
+			        <input class="input__field input__field--hoshi" id="dateSignature" type="text" name="datesignature"/>
 			        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
-			            <span class="input__label-content input__label-content--hoshi">Date eventuelle signature</span>
+			            <span class="input__label-content input__label-content--hoshi">Date éventuelle signature</span>
 			        </label>
 			    </span>
 			</div>
@@ -97,11 +84,12 @@
 	                required
 	                [(ngModel)]="c.logiciel" name="logiciel{{i}}" 
 	                #logiciel="ngModel" (ngModelChange)="onCommandeChange($event)" >
+	                	<option value="" disabled selected>Choisissez un logiciel</option>
 			          <option *ngFor="let l of logiciels" [ngValue]="l">{{l.titre}}</option>
 			        </select>
 				</div>
 				<div class="col-md-4 col-xs-4 text-left">
-					<input [(ngModel)]="c.nbacces" type="number" class="nbacces" name="nbacces" placeholder="Acces" (ngModelChange)="onCommandeChange($event)"/>
+					<input [(ngModel)]="c.nbacces" type="number" class="nbacces" name="nbacces{{i}}" placeholder="Acces" (ngModelChange)="onCommandeChange($event)"/>
 				</div>
 				<div class="col-md-4 col-xs-4 text-right">
 					<span class="prix-commande">{{c.prix}} €</span>
@@ -124,7 +112,7 @@
 		
 		
 		<div class="col-md-12 text-center">
-			<button (click)="addDeclaration()" *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
+			<button *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
 		    type="submit" name="action">Déclarer</button>
 		    <div *ngIf="showLoading" style="padding: 25px 80px;">
 		    	<img  src="../../public/img/rolling.svg"  alt="Chargement" height="50px" width="50px" />

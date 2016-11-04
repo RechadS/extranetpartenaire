@@ -26,6 +26,10 @@ h1{
   font-size: 34px;
 }
 
+.addendred{
+  color: #d23f2d;
+}
+
 .overflow-v{
   overflow: visible !important;
 }
@@ -204,13 +208,15 @@ img{
 }
 
 .input__field--hoshi:focus + .input__label--hoshi::after,
-.input--filled .input__label--hoshi::after, .input--date .input__label-content--hoshi{
+.input--filled .input__label--hoshi::after, .input--date .input__label-content--hoshi,
+.input--textarea .input__label-content--hoshi{
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
 .input__field--hoshi:focus + .input__label--hoshi .input__label-content--hoshi,
-.input--filled .input__label-content--hoshi, .input--date .input__label-content--hoshi {
+.input--filled .input__label-content--hoshi, .input--date .input__label-content--hoshi,
+.input--textarea .input__label-content--hoshi {
   -webkit-animation: anim-1 0.3s forwards;
   animation: anim-1 0.3s forwards;
 }

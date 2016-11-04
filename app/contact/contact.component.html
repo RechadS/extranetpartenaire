@@ -1,6 +1,67 @@
 <div class="row nomargin">
   <div class="col-md-12">
     <h1 class="text-center titre-page">Contact</h1>
-    
+    <div class="col-md-12">
+    	<div class="col-md-4">
+    		<p class="nom-service">Direction Commerciale</p>
+    		<p>Charles Khondji</p>
+    		<p>charles.khondji@addendasoftware.com</p>
+    		<p>01 79 62 63 54</p>
+    		
+    	</div>
+    	<div class="col-md-4">
+    		<p class="nom-service">Direction Service Client</p>
+    		<p>Vianney Montagne</p>
+    		<p>vianney.montagne@addendasoftware.com</p>
+    		<p>01 79 62 63 52</p>
+    		
+    	</div>
+    	<div class="col-md-4">
+    		<p class="nom-service">Direction Marketing</p>
+    		<p>Stephanie Guyot</p>
+    		<p>stephanie.guyot@addendasoftware.com</p>
+    		<p>01 79 62 63 43</p>
+    		
+    	</div>
+
+    </div>
+    <div class="col-md-12 formulaire">
+	    <form>
+			
+			<p>Vous avez des questions ? Envoyez nous un message via le formulaire</p>
+				<div class="col-md-12 text-left">
+				    <span class="input input--hoshi">
+				        <input class="input__field input__field--hoshi" [(ngModel)]="objet" id="objet" 
+				            type="text" name="objet" required/>
+				        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+				            <span class="input__label-content input__label-content--hoshi">Objet</span>
+				        </label>
+				    </span>
+				</div>
+			
+				
+				<div class="col-md-12 text-left">
+				    <span class="input input--hoshi input--textarea">
+				        <textarea rows="10" class="input__field input__field--hoshi" [(ngModel)]="message" id="prenom" 
+				             name="message" required></textarea>
+				        <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+				            <span class="input__label-content input__label-content--hoshi">Message</span>
+				        </label>
+				    </span>
+				</div>
+				
+			
+			
+			<div class="col-md-12 text-center">
+				<button (click)="sendMail()" *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
+			    type="submit" name="action">Envoyer</button>
+			    <div *ngIf="showLoading" style="padding: 25px 80px;">
+			    	<img  src="../../public/img/rolling.svg"  alt="Chargement" height="50px" width="50px" />
+			    </div>
+			   
+			    <p *ngIf="showMessage" class="submit-message">{{successMsg}}</p>
+			</div>
+		</form>
+	</div>
   </div>
 </div>

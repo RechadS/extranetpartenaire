@@ -30,6 +30,18 @@ export class AddDeclarationService {
             .catch(this.handleError);
   }
 
+  sendMail(objet: String, message: String): Observable<Boolean>{
+    let sendMailUrl: string = "http://localhost:4567/mail";
+    let mail = {"objet" : objet, "message" : message};
+    let body = JSON.stringify(mail);
+    
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    console.log(body);
+    return this.http.post(sendMailUrl, body, options).map(this.extractData)        
+            .catch(this.handleError);
+  }
+
   checkDeclaration(declaration: Contrat): Observable<Boolean>{
   	let addDeclarationUrl: string = "http://localhost:4567/declaration/check";
   	let body = JSON.stringify(declaration);

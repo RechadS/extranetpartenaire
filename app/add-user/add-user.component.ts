@@ -57,8 +57,6 @@ export class AddUserComponent implements OnInit {
   addUser(){
     this.showSubmit = false;
     this.showLoading = true;
-    console.log(this.user.password);
-    console.log(this.checkpassword);
     if(this.showLoading && this.user.password == this.checkpassword) {
          
         this.addService.postUser(this.user).subscribe(
@@ -79,7 +77,6 @@ export class AddUserComponent implements OnInit {
           },
           error => {
             this.showLoading = false;
-            console.log("Erreur dans le traitement de l'utilisateur");
             this.successMsg = "L'ajout a échoué";
             this.showMessage = true;
             this.showSubmit = true;

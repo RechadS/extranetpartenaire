@@ -53,7 +53,7 @@ export class LoginComponent{
                                error =>  this.errorMsg = 'Failed to login');
                             */
                        },
-                       error =>  this.errorMsg = 'Failed to login');
+                       error =>  this.errorMsg = 'Identifiants incorrects');
     }
 
     ngOnInit() {

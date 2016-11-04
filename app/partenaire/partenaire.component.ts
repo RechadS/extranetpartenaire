@@ -20,6 +20,7 @@ export class PartenaireComponent implements OnInit {
   private sub: any;
 	public listExist :boolean = false;
 	public errorMsg : String;
+  public isadmin: boolean = false;
 
 
 	constructor(private partenaireService: PartenaireService, private route: ActivatedRoute, private http: Http, private auth: AuthenticationService) {
@@ -45,6 +46,10 @@ export class PartenaireComponent implements OnInit {
                        }
                        );
     });
+
+    if(this.user.role.id == 1 || this.user.role.id == 2) {
+      this.isadmin = true;
+    }
 	}
 
 	ngOnInit() {
