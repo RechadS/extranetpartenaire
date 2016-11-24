@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import {Entreprise, Contrat, User} from '../authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 const clientUrl = (siret: string, raison: string) => `http://localhost:4567/client?siret=${siret}&raison=${raison}`;
 const declarationsUrl = (id: number) => 
           `http://localhost:4567/contrats/${id}`;
+const declarationsCheckCredentialUrl = (idcontrat: number, iduser: number) => 
+          `http://localhost:4567/contrats/${idcontrat}/checkcredentials/${iduser}`;
 
 const statutUrl = `http://localhost:4567/declaration/statut`;
 
@@ -19,32 +21,12 @@ export class DeclarationService {
   public user: User = JSON.parse(localStorage.getItem("user"));
   private sub: any;
 
-	constructor(private http: Http, private route: ActivatedRoute){
+	constructor(private http: Http, private router: Router, private route: ActivatedRoute){
   }
 
-  checkCredits(){
-    this.sub = this.route.params.subscribe(params => {
-       this.getDeclaration(+params['id'])
-          .subscribe(declaration => {
-            if(this.user.role.id == 1 || this.user.role.id == 2) {
-              console.log("Accès autorisé");
-              return true;
-            }
-            if(declaration.user.id == this.user.id) {
-              console.log("Accès autorisé");
-              return true;
-            }
-            if(this.user.role.id == 3 && this.user.entreprise.id == declaration.user.entreprise.id) {
-              console.log("Accès autorisé");
-              return true;
-            }
-            console.log("Accès refusé");
-            return false;
-          },
-          error => {
-            console.log("Impossible de récupérer le contrat")
-          });
-    });
+  checkCredentials(idcontrat: number, iduser: number): Observable<boolean>{
+    return this.http.get(declarationsCheckCredentialUrl(idcontrat, iduser)).map(this.extractData)        
+            .catch(this.handleError);
 
     
   }

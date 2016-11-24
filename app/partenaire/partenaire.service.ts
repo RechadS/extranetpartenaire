@@ -14,7 +14,9 @@ const partenaireContratsUrl = (identreprise: number) =>
 @Injectable()
 export class PartenaireService {
 
-	
+	// store the URL so we can redirect
+  redirectUrl: string;
+  
 	constructor(private http: Http){
   }
 

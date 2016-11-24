@@ -36,6 +36,7 @@ import { AuthenticationService } from '../authentication.service';
 import { privateRouting } from './private.routing';
 
 import { DeclarationGuard } from '../declaration/declaration-guard.service';
+import { AdminGuard } from '../admin-guard.service';
 
 @NgModule({
   imports: [
@@ -84,7 +85,7 @@ import { DeclarationGuard } from '../declaration/declaration-guard.service';
   providers: [
     AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService, ListPartenaireService,
     PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService, ContactService,
-    DeclarationGuard
+    DeclarationGuard, AdminGuard
   ]
 })
 export class PrivateModule {}

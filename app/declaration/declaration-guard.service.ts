@@ -1,11 +1,13 @@
 import { Injectable }       from '@angular/core';
 import {
   CanActivate, Router,
+  ActivatedRoute,
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 }                           from '@angular/router';
-import {Entreprise, Contrat, User} from '../authentication.service';
+import {Contrat, User} from '../authentication.service';
 import { DeclarationService }      from './declaration.service';
+import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export class DeclarationGuard implements CanActivate {
@@ -15,26 +17,30 @@ export class DeclarationGuard implements CanActivate {
 
   constructor(private declarationService: DeclarationService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     let url: string = state.url;
-
-    return this.checkCredits(url);
+    return this.checkCredentials(url, route);
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.canActivate(route, state);
   }
 
-  checkCredits(url: string): boolean {
-    
-    if(this.declarationService.checkCredits) {
-      return true;
-    }
-    // Store the attempted URL for redirecting
-    this.declarationService.redirectUrl = url;
+  checkCredentials(url: string, route: ActivatedRouteSnapshot): Observable<boolean> {
 
-    // Navigate to the home page with extras
-    this.router.navigate(['/private', 'home']);
-    return false;
+    return this.declarationService.checkCredentials(+route.params['id'], this.user.id)
+              .map(
+                result => {
+                  if(result == false) {
+                    this.declarationService.redirectUrl = url;
+                    // Navigate to the home page
+                    this.router.navigate(['/private', 'home']);
+                  }
+                  return result;
+                }                  
+              );
+      
+      
+    
   }
 }
