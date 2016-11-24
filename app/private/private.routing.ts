@@ -20,6 +20,7 @@ import { ContactComponent } from '../contact/contact.component';
 
 import { AuthGuard } from '../authentication-guard.service';
 import { DeclarationGuard } from '../declaration/declaration-guard.service';
+import { AdminGuard } from '../admin-guard.service';
 
 export const privateroutes: Routes  = [
   {path: '', redirectTo : 'private/home', pathMatch:'full'},
@@ -39,11 +40,11 @@ export const privateroutes: Routes  = [
 			{ path: 'documentation', component: DocumentationComponent},
 			{ path: 'clients', component: ListClientComponent},
 			{ path: 'clients/:id', component: ClientComponent},
-			{ path: 'partenaires', component: ListPartenaireComponent},
-			{ path: 'partenaires/:id', component: PartenaireComponent},
-			{ path: 'partenaires-add', component: AddPartenaireComponent},
-			{ path: 'partenaires/:id/adduser', component: AddUserComponent},
-			{ path: 'utilisateurs', component: ListUserComponent},
+			{ path: 'partenaires', component: ListPartenaireComponent, canActivate: [AdminGuard]},
+			{ path: 'partenaires/:id', component: PartenaireComponent, canActivate: [AdminGuard]},
+			{ path: 'partenaires-add', component: AddPartenaireComponent, canActivate: [AdminGuard]},
+			{ path: 'partenaires/:id/adduser', component: AddUserComponent, canActivate: [AdminGuard]},
+			{ path: 'utilisateurs', component: ListUserComponent, canActivate: [AdminGuard]},
 			{ path: 'contact', component: ContactComponent}
 		],
 	}
