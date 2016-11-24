@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import {Entreprise, Contrat, User} from '../authentication.service';
+import { ActivatedRoute } from '@angular/router';
 
 const clientUrl = (siret: string, raison: string) => `http://localhost:4567/client?siret=${siret}&raison=${raison}`;
 const declarationsUrl = (id: number) => 
@@ -13,8 +14,39 @@ const statutUrl = `http://localhost:4567/declaration/statut`;
 @Injectable()
 export class DeclarationService {
 
-	
-	constructor(private http: Http){
+	// store the URL so we can redirect
+  redirectUrl: string;
+  public user: User = JSON.parse(localStorage.getItem("user"));
+  private sub: any;
+
+	constructor(private http: Http, private route: ActivatedRoute){
+  }
+
+  checkCredits(){
+    this.sub = this.route.params.subscribe(params => {
+       this.getDeclaration(+params['id'])
+          .subscribe(declaration => {
+            if(this.user.role.id == 1 || this.user.role.id == 2) {
+              console.log("Accès autorisé");
+              return true;
+            }
+            if(declaration.user.id == this.user.id) {
+              console.log("Accès autorisé");
+              return true;
+            }
+            if(this.user.role.id == 3 && this.user.entreprise.id == declaration.user.entreprise.id) {
+              console.log("Accès autorisé");
+              return true;
+            }
+            console.log("Accès refusé");
+            return false;
+          },
+          error => {
+            console.log("Impossible de récupérer le contrat")
+          });
+    });
+
+    
   }
 
   getClient(client: Entreprise): Observable<Entreprise>{

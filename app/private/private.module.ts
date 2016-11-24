@@ -35,6 +35,8 @@ import { ContactService } from '../contact/contact.service';
 import { AuthenticationService } from '../authentication.service';
 import { privateRouting } from './private.routing';
 
+import { DeclarationGuard } from '../declaration/declaration-guard.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ import { privateRouting } from './private.routing';
   ],
   providers: [
     AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService, ListPartenaireService,
-    PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService, ContactService
+    PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService, ContactService,
+    DeclarationGuard
   ]
 })
 export class PrivateModule {}

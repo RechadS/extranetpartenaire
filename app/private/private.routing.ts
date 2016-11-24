@@ -19,6 +19,7 @@ import { ContactComponent } from '../contact/contact.component';
 
 
 import { AuthGuard } from '../authentication-guard.service';
+import { DeclarationGuard } from '../declaration/declaration-guard.service';
 
 export const privateroutes: Routes  = [
   {path: '', redirectTo : 'private/home', pathMatch:'full'},
@@ -33,8 +34,8 @@ export const privateroutes: Routes  = [
 			{ path: 'home', component: HomeComponent},
 			{ path: 'declarer', component: AddDeclarationComponent},
 			{ path: 'declarations', component: ListDeclarationComponent},
-			{ path: 'declarations/:id', component: DeclarationComponent},
-			{ path: 'contrat/:id', component: DeclarationComponent},
+			{ path: 'declarations/:id', component: DeclarationComponent, canActivate: [DeclarationGuard]},
+			{ path: 'contrat/:id', component: DeclarationComponent, canActivate: [DeclarationGuard]},
 			{ path: 'documentation', component: DocumentationComponent},
 			{ path: 'clients', component: ListClientComponent},
 			{ path: 'clients/:id', component: ClientComponent},
@@ -48,7 +49,6 @@ export const privateroutes: Routes  = [
 	}
 	]
 	}
-  
 ];
 
 export const privateRouting: ModuleWithProviders = RouterModule.forChild(privateroutes);

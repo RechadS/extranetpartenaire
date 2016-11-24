@@ -64,11 +64,6 @@ export class CommandeOption {
   }
 }
 
-var users = [
-  new User( null, '', '', 'admin@admin.com','adm9', null, null, null),
-  new User( null, '', '', 'user1@gmail.com','a23', null, null, null)
-];
-
 const loginUrl = (email: string, password: string) => `http://localhost:4567/login?email=${email}&password=${password}`;
 const entrepriseUrl = (id: number) => `http://localhost:4567/entreprise?id=${id}`;
 
