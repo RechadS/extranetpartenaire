@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {Entreprise, Contrat, User} from '../authentication.service';
 import {DeclarationService} from './declaration.service';
 
@@ -21,7 +21,7 @@ export class DeclarationComponent implements OnInit {
 	public isadmin: boolean = false;
 	public msg: string = "";
 
-  constructor(private ref: ChangeDetectorRef, private route: ActivatedRoute, private declarationService: DeclarationService) {
+  constructor(private ref: ChangeDetectorRef, private router: Router, private route: ActivatedRoute, private declarationService: DeclarationService) {
   	this.sub = this.route.params.subscribe(params => {
        this.declaration.id = +params['id']; // (+) converts string 'id' to a number
        this.declarationService
