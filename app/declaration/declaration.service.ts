@@ -18,7 +18,6 @@ export class DeclarationService {
 
 	// store the URL so we can redirect
   redirectUrl: string;
-  public user: User = JSON.parse(localStorage.getItem("user"));
   private sub: any;
 
 	constructor(private http: Http, private router: Router, private route: ActivatedRoute){

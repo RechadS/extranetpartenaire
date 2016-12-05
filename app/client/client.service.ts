@@ -10,12 +10,22 @@ const clientUrl = (identreprise: number) =>
 const clientContratsUrl = (identreprise: number, userid:number, role: number) => 
           `http://localhost:4567/clients/${identreprise}/contrats?userid=${userid}&role=${role}`;
 
+const clientCheckCredentialUrl = (idclient: number, iduser: number) => 
+          `http://localhost:4567/clients/${idclient}/checkcredentials/${iduser}`;
 
 @Injectable()
 export class ClientService {
 
+  // store the URL so we can redirect
+  redirectUrl: string;
+  private sub: any;
 	
 	constructor(private http: Http){
+  }
+
+  checkCredentials(idclient: number, iduser: number): Observable<boolean>{
+    return this.http.get(clientCheckCredentialUrl(idclient, iduser)).map(this.extractData)        
+            .catch(this.handleError);
   }
 
   getListContrats(idEntreprise: number, user: User): Observable<Contrat[]>{

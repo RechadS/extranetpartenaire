@@ -19,15 +19,13 @@
               <a [routerLink]="['/private', 'declarer']" routerLinkActive="active"><img src="../../public/img/compose-icon.png">Déclarer une affaire</a>
             </li>
             <li>
-              <a [routerLink]="['/private', 'declarations']" routerLinkActive="active"><img src="../../public/img/listDeclarations-icon.png">Déclarations <!--<span class="badge">5</span>--></a>
+              <a [routerLink]="['/private', 'declarations']" routerLinkActive="active"><img src="../../public/img/listDeclarations-icon.png">Déclarations</a>
             </li>
             <li *ngIf="!isAdmin">
-              <a [routerLink]="['/private', 'clients']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Clients 
-              <!--<span class="badge">5</span>--></a>
+              <a [routerLink]="['/private', 'clients']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Clients</a>
             </li>
             <li *ngIf="isAdmin">
-              <a [routerLink]="['/private', 'partenaires']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Partenaires 
-              <!--<span class="badge">5</span>--></a>
+              <a [routerLink]="['/private', 'partenaires']" routerLinkActive="active"><img src="../../public/img/client-icon.png">Partenaires</a>
             </li>
             <li>
               <a [routerLink]="['/private', 'documentation']" routerLinkActive="active"><img src="../../public/img/documentation-icon.png">Documentation</a></li>

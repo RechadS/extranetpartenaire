@@ -2,6 +2,7 @@
   <div class="col-md-12">
     <h1 class="text-center titre-page">{{partenaire.raisonsociale}}</h1>
     <p>{{errorMsg}}</p>
+    <a [routerLink]="['/private', 'partenaires', partenaire.id, 'adduser']" *ngIf="partenaire.id !=null">Ajouter un utilisateur</a>
     <table class="table" *ngIf="listExist">
       <thead>
         <tr>
