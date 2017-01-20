@@ -49,7 +49,6 @@ export class AddDeclarationService {
     
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    console.log(body);
     return this.http.post(sendMailUrl, body, options).map(this.extractData)        
             .catch(this.handleError);
   }

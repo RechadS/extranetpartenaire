@@ -55,7 +55,6 @@ export class AddDeclarationComponent implements OnInit {
     this.addService.getListLogiciel().subscribe(
                      logiciels =>  {
                        this.logiciels = logiciels;
-                       console.log(this.logiciels);
                        this.ref.reattach();
                      },
                      error => console.log('Les logiciels n\'ont pas pu être chargés')
@@ -66,7 +65,6 @@ export class AddDeclarationComponent implements OnInit {
       
       this.addService.getListResponsable().subscribe(
                      responsables =>  {
-                       console.log(responsables);
                        this.responsables = responsables;
                        this.ref.reattach();
                      },
@@ -147,7 +145,9 @@ export class AddDeclarationComponent implements OnInit {
                         this.successMsg2 = "Un mail a été envoyé à AddenDa Software afin de notifier votre déclaration";
                         this.ref.reattach();
                       },
-                      error => console.log("Le mail n'a pas été envoyé")
+                      error => {
+                        this.successMsg2 = "L'envoi d'un mail à AddenDa Software a échoué";
+                      }
                       );
                     
                   } else{

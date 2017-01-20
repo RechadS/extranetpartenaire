@@ -39,7 +39,6 @@ export class LoginComponent{
                           this.user = user; 
                           if(this.user.id != null) {
                             this.isLoggedIn = true;
-                            console.log(this.user);
                             this._service.isLoggedIn = true;
                             localStorage.setItem("user", JSON.stringify(this.user));
                                    

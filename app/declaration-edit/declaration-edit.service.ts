@@ -30,7 +30,6 @@ export class DeclarationEditService {
     
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    console.log(body);
     return this.http.put(updateDeclarationsUrl, body, options).map(this.extractData)        
             .catch(this.handleError);
   }
@@ -46,7 +45,6 @@ export class DeclarationEditService {
   }
 
   deleteCommandeLogiciel(commande: CommandeLogiciel): Observable<CommandeLogiciel>{
-    console.log(commande.id);
     return this.http.delete(commandeLogicielUrl(commande.id)).map(this.extractData)        
             .catch(this.handleError);
   }

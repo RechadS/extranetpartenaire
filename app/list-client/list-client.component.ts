@@ -48,12 +48,12 @@ export class ListClientComponent {
                               }
                             }
                          }else{
-                           this.errorMsg = "Aucune déclaration en cours"
+                           this.errorMsg = "Aucun client pour le moment"
                          }
                          
                        }
                          ,
-                       error => console.log('Les déclarations n\'ont pas pu être chargés')
+                       error => this.errorMsg = 'Les déclarations n\'ont pas pu être chargés'
                        );
 
     

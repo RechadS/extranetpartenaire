@@ -53,7 +53,7 @@ export class AddPartenaireComponent implements OnInit {
               this.ref.reattach();
             } else{
               this.showLoading = false;
-              this.successMsg = "L'ajout a échouée";
+              this.successMsg = "L'ajout a échoué";
               this.showMessage = true;
               this.showSubmit = true;
               this.ref.reattach();
@@ -61,8 +61,7 @@ export class AddPartenaireComponent implements OnInit {
           },
           error => {
             this.showLoading = false;
-            console.log("Erreur dans le traitement de la déclaration");
-            this.successMsg = "La déclaration a échouée"
+            this.successMsg = "L'ajout a échoué"
             this.showMessage = true;
             this.showSubmit = true;
             this.ref.reattach();

@@ -41,7 +41,6 @@ export class ListPartenaireComponent {
                               this.partenaires[i].montant = 0;
                               
                               if(this.partenaires[i].contrats != null) {
-                                console.log(this.partenaires[i].contrats.length);
                                 for (var j = 0; j < this.partenaires[i].contrats.length; ++j) {
                                   if(this.partenaires[i].contrats[j].montant != null) {
 
@@ -52,12 +51,12 @@ export class ListPartenaireComponent {
                               }
                             }
                          }else{
-                           this.errorMsg = "Aucune déclaration en cours"
+                           this.errorMsg = "Aucune partenaire"
                          }
                          
                        }
                          ,
-                       error => console.log('Les déclarations n\'ont pas pu être chargés')
+                       error => this.errorMsg = 'Les partenaires n\'ont pas pu être chargés'
                        );
 
     

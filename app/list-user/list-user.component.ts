@@ -36,14 +36,13 @@ export class ListUserComponent {
                        partenaires =>  {
                          if(partenaires != null) {
                            this.partenaires = partenaires;
-                           console.log(this.partenaires);
                          }else{
-                           this.errorMsg = "Aucune déclaration en cours"
+                           this.errorMsg = "Aucune partenaire pour le moment"
                          }
                          
                        }
                          ,
-                       error => console.log('Les déclarations n\'ont pas pu être chargés')
+                       error => this.errorMsg = 'Les partenaires n\'ont pas pu être chargés'
                        );
 
     

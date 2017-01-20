@@ -32,7 +32,6 @@ export class PartenaireComponent implements OnInit {
 		this.partenaireService.getListContrats(+params['id']).subscribe(
                        contrats =>  {
                        	if(contrats != null && contrats.length>0) {
-                           console.log(contrats.length);
                        		this.listExist = true;
                        		this.contrats = contrats;
                        	}else{
@@ -42,7 +41,7 @@ export class PartenaireComponent implements OnInit {
                        }
                        	,
                        error => {
-                         this.errorMsg = ('Les contrats n\'ont pas pu être chargés');
+                         this.errorMsg = 'Les contrats n\'ont pas pu être chargés';
                        }
                        );
     });

@@ -30,7 +30,7 @@ export class ListDeclarationComponent implements OnInit {
                        	}
                        }
                        	,
-                       error => console.log('Les déclarations n\'ont pas pu être chargés')
+                       error => this.errorMsg = 'Les déclarations n\'ont pas pu être chargés'
                        );
     if(this.user.role.id == 1 || this.user.role.id == 2){
       this.isadmin = true;
