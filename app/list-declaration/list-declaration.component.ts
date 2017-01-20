@@ -15,6 +15,7 @@ export class ListDeclarationComponent implements OnInit {
 	public declarations : Contrat[];
 	public user: User = JSON.parse(localStorage.getItem("user"));
   public isadmin : boolean =false;
+  public isResponsable : boolean =false;
 	public listExist :boolean = false;
 	public errorMsg : String;
 
@@ -33,6 +34,9 @@ export class ListDeclarationComponent implements OnInit {
                        );
     if(this.user.role.id == 1 || this.user.role.id == 2){
       this.isadmin = true;
+    }
+    if(this.user.role.id == 3){
+      this.isResponsable = true;
     }
 	}
 

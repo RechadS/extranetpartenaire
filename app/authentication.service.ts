@@ -19,7 +19,7 @@ export class Entreprise {
 }
 
 export class Contrat {
-  constructor(public id: number, public datedebut: Date, public datefin: Date, public origine: string, public contact :string,
+  constructor(public id: number, public datedebut: Date, public datefin: Date, public origine: User, public contact :string,
     public datecontact: Date, public datesignature: Date, public montant: number, public statut: String,
     public user: User, public client: Entreprise, public contratFiles: ContratFile[], public commandeLogiciels: CommandeLogiciel[] ) { }
 }
@@ -29,22 +29,21 @@ export class ContratFile {
 }
 
 export class Logiciel {
-  
-  constructor(public id: number, public titre: String, public prix: number, public prixacces: number, public categorie: LogicielCategorie) {
-    
+  constructor(public id: number, public titre: String, public prix: number, public prixacces: number, public prixentree: number, 
+    public duree: number, public categorie: LogicielCategorie) {
   }
 }
 
 export class LogicielCategorie  {
   
-  constructor(id: number, libelle: String, options: LogicielOptions[]) {
+  constructor(public id: number, public libelle: String, public options: LogicielOptions[]) {
     // code...
   }
 }
 
 export class LogicielOptions {
   
-  constructor(id: number, libelle: String, categorie: LogicielCategorie) {
+  constructor(public id: number, public libelle: String, public categorie: LogicielCategorie) {
     // code...
   }
 }
@@ -59,7 +58,7 @@ export class CommandeLogiciel {
 
 export class CommandeOption {
   
-  constructor(id: number, commandeid: number, optionid: number) {
+  constructor(public id: number, public commandeid: number, public optionid: number) {
     // code...
   }
 }

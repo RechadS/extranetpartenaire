@@ -6,6 +6,8 @@
       <thead>
         <tr>
           <th>Contrat</th>
+          <th *ngIf="isadmin">Partenaire</th>
+          <th *ngIf="isResponsable">En charge</th>
           <th>Client</th>
           <th>Contact</th>
           <th>Statut</th>
@@ -15,10 +17,12 @@
       <tbody>
         <tr *ngFor="let declaration of declarations">
           <td><a [routerLink]="['/private', 'declarations', declaration.id]">#{{ declaration.id }}</a></td>
+          <td *ngIf="isadmin">{{ declaration.user.entreprise.raisonsociale }}</td>
+          <td *ngIf="isResponsable">{{ declaration.user.prenom }} {{ declaration.user.nom }}</td>
           <td>{{ declaration.client.raisonsociale }}</td>
           <td>{{ declaration.contact }}</td>
           <td>{{ declaration.statut }}</td>
-          <td class="text-right">{{ declaration.montant }}</td>
+          <td class="text-right">{{ declaration.montant | currency:'EUR':true:'1.0' }}</td>
         </tr>
         
       </tbody>

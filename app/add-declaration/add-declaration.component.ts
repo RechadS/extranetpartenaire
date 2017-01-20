@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
-import {AuthenticationService, Entreprise, Contrat, User, Logiciel, CommandeLogiciel} from '../authentication.service';
+import {AuthenticationService, Entreprise, Contrat, User, Logiciel, CommandeLogiciel, LogicielCategorie} from '../authentication.service';
 import {AddDeclarationService} from './add-declaration.service';
 declare var classie: any;
 declare var SelectFxJs: any;
@@ -24,36 +24,72 @@ export class Declaration {
 export class AddDeclarationComponent implements OnInit {
   public client = new Entreprise(null, '', '', '', '', '', null);
   public user: User = JSON.parse(localStorage.getItem("user"));
-  public declaration = new Contrat(null, null, null, '', '',null, null, 0, '', this.user, this.client, null, null);
+  public declaration = new Contrat(null, null, null, this.user, '',null, null, 0, '', null, this.client, null, null);
   public submitMsg: string;
   public commandes: Array<CommandeLogiciel> = [];
   public commande: CommandeLogiciel = new CommandeLogiciel(null, 1, 0, null, null, null);
   public nbCommande: number = 1;
   public successMsg: String;
+  public successMsg2: String;
   public logiciels: Logiciel[];
+  public responsables: User[];
+  public users: User[];
   public showSubmit: boolean =true;
   public showLoading: boolean =false;
   public showMessage: boolean =false;
+  public isAdmin: boolean = false;
+  public isResponsable: boolean = false;
+  public onPremiseInList: boolean = false;
+  public nbAccesPremise: number = 0;
+  public saasInList: boolean = false;
+  public nbAccesSaas: number = 0;
+  public prixEntreeSaas: number = 0;
 
   constructor(private ref: ChangeDetectorRef, private addService: AddDeclarationService,
      private http: Http, private auth: AuthenticationService){
-      this.declaration.client = this.client;
-      this.addService.getListLogiciel().subscribe(
-                       logiciels =>  {
-                         this.logiciels = logiciels;
-                         this.ref.reattach();
-                       },
-                       error => console.log('Les logiciels n\'ont pas pu être chargés')
-                       );
-
-    this.commandes.push(this.commande);
+      
   }
   ngOnInit() {
+
+    this.declaration.client = this.client;
+    this.addService.getListLogiciel().subscribe(
+                     logiciels =>  {
+                       this.logiciels = logiciels;
+                       console.log(this.logiciels);
+                       this.ref.reattach();
+                     },
+                     error => console.log('Les logiciels n\'ont pas pu être chargés')
+                     );
+
+    if(this.user.role.id == 1 || this.user.role.id == 2) {
+      this.isAdmin = true;
+      
+      this.addService.getListResponsable().subscribe(
+                     responsables =>  {
+                       console.log(responsables);
+                       this.responsables = responsables;
+                       this.ref.reattach();
+                     },
+                     error => console.log('Les responsables n\'ont pas pu être chargés')
+                     );
+    }
+
+    if(this.user.role.id == 3) {
+      this.isResponsable = true;
+      this.addService.getListUser(this.user).subscribe(
+                     users =>  {
+                       this.users = users;
+                       this.ref.reattach();
+                     },
+                     error => console.log('Les responsables n\'ont pas pu être chargés')
+                     );
+    }
+    this.commandes.push(this.commande);
+
     jQuery.noConflict();
-    jQuery('#dateContact').datepicker({ dateFormat: 'yy-mm-dd' });
-    jQuery('#dateSignature').datepicker({ dateFormat: 'yy-mm-dd' });
+    jQuery('#dateContact').datepicker({ dateFormat: 'dd/mm/yy' });
+    jQuery('#dateSignature').datepicker({ dateFormat: 'dd/mm/yy' });
   	inputlabel.inputlabelcheck();
-    
   }
 
   newCommandelogiciel(){
@@ -62,11 +98,23 @@ export class AddDeclarationComponent implements OnInit {
   }
   
   addDeclaration(){
+    this.successMsg = "";
+      this.showMessage = false;
+      this.ref.reattach();
     if(jQuery('#dateContact').val() != '') {
       this.declaration.datecontact = jQuery('#dateContact').val();
     }
     if(jQuery('#dateSignature').val() != '') {
       this.declaration.datesignature = jQuery('#dateSignature').val();
+    }
+    if(this.user.role.id == 4) {
+      this.declaration.user = this.user;
+    }
+    if(this.client.siret.length != 14) {
+      this.successMsg = "Veuillez saisir un N° de SIRET à 14 chiffres";
+      this.showMessage = true;
+      this.ref.reattach();
+      return;
     }
     this.showSubmit = false;
     this.showLoading = true;
@@ -82,7 +130,6 @@ export class AddDeclarationComponent implements OnInit {
                 declaration => {
                   // If the declaration has been created in DB
                   if(declaration) {
-                    this.showLoading = false;
                     this.successMsg = "Déclaration effectuée";
                     this.showMessage = true;
                     this.ref.reattach();
@@ -95,7 +142,11 @@ export class AddDeclarationComponent implements OnInit {
                               + ", nombre d'accès: " +this.declaration.commandeLogiciels[i].nbacces;
                     }
                     this.addService.sendMail(objet, message).subscribe(
-                      message => console.log("Le mail a été envoyé"),
+                      message => {
+                        this.showLoading = false;
+                        this.successMsg2 = "Un mail a été envoyé à AddenDa Software afin de notifier votre déclaration";
+                        this.ref.reattach();
+                      },
                       error => console.log("Le mail n'a pas été envoyé")
                       );
                     
@@ -136,10 +187,71 @@ export class AddDeclarationComponent implements OnInit {
 
   onCommandeChange(event: Event){
     this.declaration.montant = 0;
+    this.onPremiseInList = false;
+    this.nbAccesPremise = 0;
+    this.saasInList = false;
+    this.nbAccesSaas = 0;
+    this.prixEntreeSaas = 0;
     this.commandes.forEach( commande => {
+
+      commande.prix = 0;
+
       if(commande.logiciel != null) {
-        commande.prix = commande.logiciel.prix + (commande.logiciel.prixacces * commande.nbacces) - commande.logiciel.prixacces;
-        this.declaration.montant += commande.prix;
+
+        if(commande.logiciel.categorie.libelle == 'On Premise') {
+
+          if(!this.onPremiseInList) {
+
+            commande.prix = commande.logiciel.prix + (commande.logiciel.prixacces * ( commande.nbacces - 1 ) );
+            this.nbAccesPremise = commande.nbacces;
+            this.onPremiseInList = true;
+
+          } else{
+
+            if(commande.nbacces > this.nbAccesPremise) {
+
+              let nbAccesToAdd = commande.nbacces - this.nbAccesPremise;
+              commande.prix = commande.logiciel.prix + (nbAccesToAdd * commande.logiciel.prixacces);
+              this.nbAccesPremise = commande.nbacces;
+
+            } else{
+              commande.prix = commande.logiciel.prix;
+            }
+
+          }
+
+          this.declaration.montant += commande.prix;
+
+        } else{
+
+            if(!this.saasInList) {
+
+              this.prixEntreeSaas = commande.logiciel.prixentree;
+              commande.prix = commande.logiciel.prixentree + (commande.logiciel.prix + (commande.logiciel.prixacces * (commande.nbacces-1) ) )  * commande.logiciel.duree;
+              this.saasInList = true;
+              this.nbAccesSaas = commande.nbacces;
+              this.prixEntreeSaas = commande.logiciel.prixentree;
+
+            } else{
+
+              if(commande.logiciel.prixentree > this.prixEntreeSaas) {
+                let prixEntreeToAdd = commande.logiciel.prixentree - this.prixEntreeSaas;
+                commande.prix += prixEntreeToAdd;
+              }
+              if(commande.nbacces > this.nbAccesSaas) {
+                let nbAccesToAdd = commande.nbacces - this.nbAccesSaas;
+                commande.prix += ((80 + (commande.logiciel.prixacces * nbAccesToAdd) ) * commande.logiciel.duree);
+                this.nbAccesSaas = commande.nbacces;
+              } else{
+                commande.prix += (80 * commande.logiciel.duree);
+              }
+
+            }
+
+            this.declaration.montant += commande.prix;
+        }
+        
+
       }
       });
   }

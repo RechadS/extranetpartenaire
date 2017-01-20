@@ -1,0 +1,115 @@
+<div class="row nomargin">
+  <div class="col-md-12">
+    <h1 class="text-center titre-page">{{title}} #{{declaration.id}}</h1>
+    <form (ngSubmit)="updateDeclaration()">
+    <div class="col-md-12">
+    
+    	<div  class="col-md-6">
+    		<p>Client: {{declaration.client.raisonsociale}}</p>
+    	</div>
+    	<div  class="col-md-6">
+    		<p>Siret: {{declaration.client.siret}}</p>
+    	</div>
+    </div>
+    
+    
+    <div class="row nomargin">
+        <div class="col-md-6 text-center">
+            <span class="input input--hoshi">
+                <input class="input__field input__field--hoshi" [(ngModel)]="declaration.contact" id="contact" 
+                    type="text" name="contact"/>
+                <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                    <span class="input__label-content input__label-content--hoshi">Nom du contact</span>
+                </label>
+            </span>
+        </div>
+
+        <div class="col-md-6 text-center" *ngIf="isadmin || isResponsable">
+                <span class="input input--hoshi">
+                    <select *ngIf="isadmin" [(ngModel)]="declaration.user" id="attributedto" name="attributedto">
+                        <option value="" disabled selected>Attribué à</option>
+                        <option  *ngFor="let r of responsables" [ngValue]="r">{{r.entreprise.raisonsociale}}</option>
+                    </select>
+                    <select *ngIf="isResponsable" [(ngModel)]="declaration.user" id="attributedto" name="attributedto">
+                        <option value="" disabled selected>Attribué à</option>
+                        <option *ngFor="let u of users" [ngValue]="u">{{u.nom}} {{u.prenom}}</option>
+                    </select>
+                </span>
+            </div>
+        
+    </div>
+    <div class="row nomargin">
+        <div class="col-md-6 text-center">
+            <span class="input input--hoshi input--date">
+            <input type='text' id="dateContact" name="datecontact" class="input__field input__field--hoshi" />
+             <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                    <span class="input__label-content input__label-content--hoshi">Date du contact</span>
+                </label>   
+            </span>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <span class="input input--hoshi input--date">
+                <input class="input__field input__field--hoshi" id="dateSignature" type='text' name="datesignature"/>
+                <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                    <span class="input__label-content input__label-content--hoshi">Date éventuelle signature</span>
+                </label>
+            </span>
+        </div>
+    </div>
+    <div class="row nomargin">
+        <div class="col-md-6 text-center">
+            <span class="input input--hoshi input--date">
+            <input type='text' id="dateDebut" name="datedebut" class="input__field input__field--hoshi"/>
+             <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                    <span class="input__label-content input__label-content--hoshi">Date de début</span>
+                </label>   
+            </span>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <span class="input input--hoshi input--date">
+                <input class="input__field input__field--hoshi" id="dateFin" type='text' name="datefin"/>
+                <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="input-6">
+                    <span class="input__label-content input__label-content--hoshi">Date date de fin</span>
+                </label>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-12">
+    	<table class="table">
+          <thead>
+            <tr>
+              <th>Logiciel</th>
+              <th>Nombre d'accès</th>
+              <th>Montant</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commande of declaration.commandeLogiciels">
+              <td>{{ commande.logiciel.titre }}</td>
+              <td>{{ commande.nbacces }}</td>
+              <td>{{ commande.prix | currency:'EUR':true:'1.0' }}</td>
+              <td><button (click)="deleteCommande(commande)" type="button" class="btn btn-4 btn-4c icon-arrow-right">Supp</button></td>
+            </tr>
+          </tbody>
+        </table>  
+    </div>
+    
+    <div class="col-md-12 text-center">
+        <button *ngIf="showSubmit" class="btn btn-4 btn-4c icon-arrow-right" 
+        type="submit" name="action">Déclarer</button>
+        <div *ngIf="showLoading" style="padding: 25px 80px;">
+            <img  src="../../public/img/rolling.svg"  alt="Chargement" height="50px" width="50px" />
+        </div>
+       
+        <p *ngIf="showMessage" class="submit-message">{{successMsg}}</p>
+    </div>
+    <div class="col-md-12 text-center" >
+        <p>{{msg}}</p>
+    </div>
+    </form>
+
+  </div>
+</div>

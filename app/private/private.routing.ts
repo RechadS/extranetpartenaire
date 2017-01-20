@@ -6,6 +6,7 @@ import { HomeComponent } from '../home/home.component';
 import { AddDeclarationComponent } from '../add-declaration/add-declaration.component';
 import { ListDeclarationComponent } from '../list-declaration/list-declaration.component';
 import { DeclarationComponent } from '../declaration/declaration.component';
+import { DeclarationEditComponent } from '../declaration-edit/declaration-edit.component';
 import { AddPartenaireComponent } from '../add-partenaire/add-partenaire.component';
 import { ListPartenaireComponent } from '../list-partenaire/list-partenaire.component';
 import { PartenaireComponent } from '../partenaire/partenaire.component';
@@ -37,6 +38,7 @@ export const privateroutes: Routes  = [
 			{ path: 'declarer', component: AddDeclarationComponent},
 			{ path: 'declarations', component: ListDeclarationComponent},
 			{ path: 'declarations/:id', component: DeclarationComponent, canActivate: [DeclarationGuard]},
+			{ path: 'declarations/:id/edit', component: DeclarationEditComponent, canActivate: [DeclarationGuard]},
 			{ path: 'contrat/:id', component: DeclarationComponent, canActivate: [DeclarationGuard]},
 			{ path: 'documentation', component: DocumentationComponent},
 			{ path: 'clients', component: ListClientComponent},

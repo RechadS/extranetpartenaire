@@ -1,5 +1,5 @@
 import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
+import { CommonModule, DatePipe }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +15,7 @@ import { ContratComponent } from '../contrat/contrat.component';
 import { ContactComponent } from '../contact/contact.component';
 import { LeftsidebarComponent } from '../leftsidebar/leftsidebar.component'; 
 import { DeclarationComponent } from '../declaration/declaration.component';
+import { DeclarationEditComponent } from '../declaration-edit/declaration-edit.component';
 import { PartenaireComponent } from '../partenaire/partenaire.component';
 import { AddPartenaireComponent } from '../add-partenaire/add-partenaire.component';
 import { ListUserComponent } from '../list-user/list-user.component';
@@ -22,13 +23,14 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { ListClientComponent } from '../list-client/list-client.component';
 
 
-import {AddDeclarationService} from '../add-declaration/add-declaration.service';
+import { AddDeclarationService} from '../add-declaration/add-declaration.service';
 import { AddPartenaireService } from '../add-partenaire/add-partenaire.service';
 import { AddUserService } from '../add-user/add-user.service';
-import {DeclarationService} from '../declaration/declaration.service';
-import {ListDeclarationService} from '../list-declaration/list-declaration.service';
-import {PartenaireService} from '../partenaire/partenaire.service';
-import {ListPartenaireService} from '../list-partenaire/list-partenaire.service';
+import { DeclarationService} from '../declaration/declaration.service';
+import { DeclarationEditService } from '../declaration-edit/declaration-edit.service';
+import { ListDeclarationService} from '../list-declaration/list-declaration.service';
+import { PartenaireService} from '../partenaire/partenaire.service';
+import { ListPartenaireService} from '../list-partenaire/list-partenaire.service';
 import { ClientService } from '../client/client.service';
 import { ListClientService } from '../list-client/list-client.service';
 import { ContactService } from '../contact/contact.service';
@@ -61,6 +63,7 @@ import { AdminGuard } from '../admin-guard.service';
     ContratComponent,
     ContactComponent,
     DeclarationComponent,
+    DeclarationEditComponent,
     ListUserComponent,
     AddUserComponent,
     ListClientComponent
@@ -79,14 +82,15 @@ import { AdminGuard } from '../admin-guard.service';
     ContratComponent,
     ContactComponent,
     DeclarationComponent,
+    DeclarationEditComponent,
     ListUserComponent,
     AddUserComponent,
     ListClientComponent
   ],
   providers: [
-    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService, ListPartenaireService,
-    PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService, ContactService,
-    DeclarationGuard, ClientGuard, AdminGuard
+    AuthenticationService, AddDeclarationService, ListDeclarationService, DeclarationService, DeclarationEditService,
+    ListPartenaireService, PartenaireService, AddPartenaireService, AddUserService, ListClientService, ClientService, ContactService,
+    DeclarationGuard, ClientGuard, AdminGuard, DatePipe
   ]
 })
 export class PrivateModule {}

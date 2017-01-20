@@ -37,21 +37,17 @@ export class LoginComponent{
                      .subscribe(
                        user =>  {
                           this.user = user; 
-                          this.isLoggedIn = true;
-                          console.log(this.isLoggedIn);
-                          this._service.isLoggedIn = true;
-                          localStorage.setItem("user", JSON.stringify(this.user));
-                                 
-                          this.router.navigate(['/private', 'home'], {relativeTo: this.route});
-                                /*
-                          this._service.getEntreprise(this.user).subscribe(
-                               entreprise =>  {
-                                 this.user.entreprise = entreprise;
-                                 
-                                alert(localStorage.getItem("user"));
-                               },
-                               error =>  this.errorMsg = 'Failed to login');
-                            */
+                          if(this.user.id != null) {
+                            this.isLoggedIn = true;
+                            console.log(this.user);
+                            this._service.isLoggedIn = true;
+                            localStorage.setItem("user", JSON.stringify(this.user));
+                                   
+                            this.router.navigate(['/private', 'home'], {relativeTo: this.route});
+                          } else{
+                            this.errorMsg = 'Un problème interne est survenu';
+                          }
+                          
                        },
                        error =>  this.errorMsg = 'Identifiants incorrects');
     }

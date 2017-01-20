@@ -3,6 +3,7 @@ import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import {Entreprise, Contrat, User} from '../authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 const clientUrl = (siret: string, raison: string) => `http://localhost:4567/client?siret=${siret}&raison=${raison}`;
 const declarationsUrl = (id: number) => 
@@ -36,7 +37,7 @@ export class DeclarationService {
   }
 
   getDeclaration(id: number): Observable<Contrat>{
-  	return this.http.get(declarationsUrl(id)).map(this.extractData)        
+  	return this.http.get(declarationsUrl(id)).map(this.extractDeclaration)        
             .catch(this.handleError);
   }
 
@@ -52,6 +53,28 @@ export class DeclarationService {
 
   private extractData(res: Response) {
     let body = res.json();
+    return body;  //.data || { };
+  }
+
+  private extractDeclaration(res: Response) {
+    let body = res.json();
+    
+      if(body.datecontact != null) {
+        body.datecontact = new Date(body.datesignature);
+      }
+      if(body.datesignature != null) {
+        body.datesignature = new Date(body.datesignature);
+      }
+      if(body.datedebut != null) {
+        body.datedebut = new Date(body.datedebut);
+
+      }
+      if(body.datefin != null) {
+        console.log("Date de fin: " + body.datefin);
+        let d = Date.parse(body.datefin);
+        console.log("Locale: " + moment(body.datefin).locale());
+        body.datefin = new Date(d);
+      }
     return body;  //.data || { };
   }
 

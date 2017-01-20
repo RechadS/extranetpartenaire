@@ -333,6 +333,10 @@ input[type="date"] .input__field--hoshi + .input__label--hoshi .input__label-con
   content: "\e00d";
 }
 
+.icon-arrow-wrong:before {
+  content: "\e003";
+}
+
 .btn:before, .icon-heart:after, .icon-star:after, .icon-plus:after, .icon-file:before {
     font-family: 'icomoon';
     speak: none;

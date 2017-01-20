@@ -46,9 +46,10 @@
         main: '/md5.js'
       },
       'moment': { 
-        main: 'moment.js', 
+        main: 'min/moment-with-locales.js', 
+        type: 'cjs',
         defaultExtension: 'js' 
       }
-    }
+}
   });
 })(this);
