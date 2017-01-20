@@ -70,10 +70,7 @@ export class DeclarationService {
 
       }
       if(body.datefin != null) {
-        console.log("Date de fin: " + body.datefin);
-        let d = Date.parse(body.datefin);
-        console.log("Locale: " + moment(body.datefin).locale());
-        body.datefin = new Date(d);
+        body.datefin = new Date(body.datefin);
       }
     return body;  //.data || { };
   }

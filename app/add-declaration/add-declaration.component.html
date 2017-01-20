@@ -36,11 +36,11 @@
  
 			<div class="col-md-6 text-center" *ngIf="isAdmin || isResponsable">
 			    <span class="input input--hoshi">
-			        <select *ngIf="isAdmin" [(ngModel)]="declaration.user" id="attributedto" name="attributedto">
+			        <select *ngIf="isAdmin" [(ngModel)]="declaration.user" id="attributedto" name="attributedto" required>
 						<option value="" disabled selected>Attribué à</option>
 						<option  *ngFor="let r of responsables" [ngValue]="r">{{r.entreprise.raisonsociale}}</option>
 					</select>
-					<select *ngIf="isResponsable" id="attributedto" name="attributedto">
+					<select *ngIf="isResponsable" [(ngModel)]="declaration.user" id="attributedto" name="attributedto" required>
 						<option value="" disabled selected>Attribué à</option>
 						<option *ngFor="let u of users" [ngValue]="u">{{u.nom}} {{u.prenom}}</option>
 					</select>

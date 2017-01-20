@@ -56,7 +56,6 @@ export class AddDeclarationService {
   checkDeclaration(declaration: Contrat): Observable<Boolean>{
   	let addDeclarationUrl: string = "http://localhost:4567/declaration/check";
   	let body = JSON.stringify(declaration);
-  	
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 

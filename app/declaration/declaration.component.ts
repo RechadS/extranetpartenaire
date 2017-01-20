@@ -38,7 +38,6 @@ export class DeclarationComponent implements OnInit {
           .subscribe(declaration => {
             this.declaration = declaration;
             this.ref.reattach();
-            console.log(declaration);
             this.declaration.commandeLogiciels = declaration.commandeLogiciels;
             if(this.declaration.statut == "Déclarée") {
               this.tovalidate = true;
@@ -56,7 +55,7 @@ export class DeclarationComponent implements OnInit {
             this.ref.reattach();
           },
           error => {
-            console.log("Impossible de récupérer le contrat")
+            this.msg = ("Impossible de récupérer le contrat")
           });
     });
 

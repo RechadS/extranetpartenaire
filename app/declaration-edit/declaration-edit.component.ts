@@ -77,7 +77,6 @@ export class DeclarationEditComponent implements OnInit {
       this.isadmin = true;
       this.editService.getListResponsable().subscribe(
                      responsables =>  {
-                       console.log(responsables);
                        this.responsables = responsables;
                        this.ref.reattach();
                      },
@@ -209,7 +208,6 @@ export class DeclarationEditComponent implements OnInit {
   updateDeclaration(){
     
     if(jQuery('#dateContact').val() != '') {
-      console.log(jQuery('#dateContact').val());
       this.declaration.datecontact = jQuery('#dateContact').val();
     }
     if(jQuery('#dateSignature').val() != '') {

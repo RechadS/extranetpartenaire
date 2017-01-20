@@ -31,7 +31,6 @@ export class ClientComponent implements OnInit {
 		this.clientService.getListContrats(+params['id'], this.user).subscribe(
                        contrats =>  {
                        	if(contrats != null && contrats.length>0) {
-                           console.log(contrats.length);
                        		this.listExist = true;
                        		this.contrats = contrats;
                        	}else{
