@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -24,7 +24,10 @@ import {LoginComponent} from './login/login.component';
     PrivateModule,
     JsonpModule
   ],
-  providers: [appRoutingProviders],
+  providers: [
+      { provide: LOCALE_ID, useValue: 'fr' }, 
+      appRoutingProviders
+  ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })

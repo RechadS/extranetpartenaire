@@ -1,6 +1,15 @@
 <div class="row nomargin">
   <div class="col-md-12">
     <h1 class="text-center titre-page">{{title}} #{{declaration.id}}</h1>
+    <div class="col-md-12" *ngIf="isadmin && declaration.user!= null">
+        <div  class="col-md-6">
+            <p>Partenaire: {{declaration.user.entreprise.raisonsociale}}</p>
+        </div>
+        <div  class="col-md-6">
+            <p>En charge: {{declaration.user.prenom}} {{declaration.user.nom}}</p>
+        </div>
+    </div>
+
     <div class="col-md-12">
     	<div  class="col-md-6">
     		<p>Client: {{declaration.client.raisonsociale}}</p>
@@ -11,12 +20,20 @@
     </div>
     
     <div class="col-md-12">
-    	<div  class="col-md-6">
-    		<p>Date de contact: {{declaration.datecontact}}</p>
+    	<div  class="col-md-6" *ngIf="declaration.datecontact != '' && declaration.datecontact != null">
+    		<p >Date de contact: {{declaration.datecontact | date:'dd/MM/yyyy'}}</p>
     	</div>
-    	<div  class="col-md-6">
-    		<p>Date éventuelle de signature: {{declaration.datesignature}}</p>
+    	<div  class="col-md-6" *ngIf="declaration.datesignature != '' && declaration.datesignature != null">
+    		<p >Date éventuelle de signature: {{declaration.datesignature | date:'dd/MM/yyyy'}}</p>
     	</div>
+    </div>
+    <div class="col-md-12">
+        <div  class="col-md-6" *ngIf="declaration.datedebut != '' && declaration.datedebut != null">
+            <p >Date de début: {{declaration.datedebut | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div  class="col-md-6" *ngIf="declaration.datefin != '' && declaration.datefin != null">
+            <p >Date de fin: {{declaration.datefin | date:'dd/MM/yyyy'}}</p>
+        </div>
     </div>
 
     <div class="col-md-12">
@@ -24,10 +41,10 @@
     		<p>Nom du contact: {{declaration.contact}}</p>
     	</div>
     	<div  class="col-md-6">
-    		<p>Montant: {{declaration.montant}} €</p>
+    		<p>Montant: {{declaration.montant | currency:'EUR':true:'1.0' }}</p>
     	</div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="declaration.commandeLogiciels != null && declaration.commandeLogiciels.length >0">
     	<table class="table">
       <thead>
         <tr>
@@ -40,7 +57,7 @@
         <tr *ngFor="let commande of declaration.commandeLogiciels">
           <td>{{ commande.logiciel.titre }}</td>
           <td>{{ commande.nbacces }}</td>
-          <td>{{ commande.prix }} €</td>
+          <td>{{ commande.prix | currency:'EUR':true:'1.0' }}</td>
         </tr>
       </tbody>
     </table>  
@@ -53,7 +70,7 @@
 		    type="submit" name="action">Valider</button>
     	</div>
     	<div  class="col-md-6 text-left" *ngIf="tovalidate">
-    		<button (click)="updatesatut('Refusée')" class="btn btn-4 btn-4c icon-arrow-right" 
+    		<button (click)="updatesatut('Refusée')" class="btn btn-4 btn-4c icon-arrow-wrong" 
 		    type="submit" name="action">Refuser</button>
     	</div>
     </div>
@@ -63,9 +80,13 @@
 		    type="submit" name="action">Gagnée</button>
     	</div>
     	<div  class="col-md-6 text-left">
-    		<button (click)="updatesatut('Perdue')" class="btn btn-4 btn-4c icon-arrow-right" 
+    		<button (click)="updatesatut('Perdue')" class="btn btn-4 btn-4c icon-arrow-wrong" 
 		    type="submit" name="action">Perdue</button>
     	</div>
+    </div>
+    <div class="col-md-12 text-center" *ngIf="isDeclaration">
+        <a class="btn btn-4 btn-4c" [routerLink]="['/private', 'declarations', declaration.id, 'edit']" *ngIf="declaration.id !=null">
+        Modifier la déclaration<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
     </div>
     <div class="col-md-12 text-center" >
     	<p>{{msg}}</p>

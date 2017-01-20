@@ -1,21 +1,33 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import {Entreprise, Contrat, User, Logiciel} from '../authentication.service';
+import {Entreprise, Contrat, User, Logiciel, LogicielCategorie} from '../authentication.service';
 
 const clientUrl = (siret: string, raison: string) => `http://localhost:4567/client?siret=${siret}&raison=${raison}`;
 const entrepriseUrl = (id: number) => `http://localhost:4567/entreprise?id=${id}`;
+const partenaireUsersUrl = (identreprise: number) => 
+          `http://localhost:4567/partenaire/${identreprise}/users`;
 const logicielUrl = `http://localhost:4567/logiciels`;
+const responsablesUrl = `http://localhost:4567/partenaires/responsables`;
 
 @Injectable()
 export class AddDeclarationService {
 
-	
 	constructor(private http: Http){
   }
 
   getClient(client: Entreprise): Observable<Entreprise>{
     return this.http.get(clientUrl(client.siret, client.raisonsociale)).map(this.extractData)        
+            .catch(this.handleError);
+  }
+
+  getListResponsable(): Observable<User[]>{
+    return this.http.get(responsablesUrl).map(this.extractData)        
+            .catch(this.handleError);
+  }
+
+  getListUser(user: User): Observable<User[]>{
+    return this.http.get(partenaireUsersUrl(user.entreprise.id)).map(this.extractData)        
             .catch(this.handleError);
   }
 

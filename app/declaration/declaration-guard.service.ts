@@ -13,7 +13,7 @@ import { Observable }     from 'rxjs/Observable';
 export class DeclarationGuard implements CanActivate {
   private sub: any;
   private user: User = JSON.parse(localStorage.getItem("user"));
-  private declaration: Contrat = new Contrat(null, null, null, '', '',null, null, null, '', null, null, null, null);
+  private declaration: Contrat = new Contrat(null, null, null, null, '',null, null, null, '', null, null, null, null);
 
   constructor(private declarationService: DeclarationService, private router: Router) {}
 
