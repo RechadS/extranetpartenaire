@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
-import {AuthenticationService, User} from '../authentication.service';
+import {AuthenticationService} from '../authentication.service';
+import {User} from '../entity/model';
 import {ContactService} from './contact.service';
 declare var classie: any;
 declare var SelectFxJs: any;

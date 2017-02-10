@@ -4,7 +4,8 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 }                           from '@angular/router';
-import {AuthenticationService, User} from './authentication.service';
+import {AuthenticationService} from './authentication.service';
+import {User} from './entity/model';
 
 @Injectable()
 export class AdminGuard implements CanActivate {

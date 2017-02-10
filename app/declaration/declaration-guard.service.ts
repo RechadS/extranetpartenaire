@@ -5,8 +5,8 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 }                           from '@angular/router';
-import {Contrat, User} from '../authentication.service';
-import { DeclarationService }      from './declaration.service';
+import {Contrat, User} from '../entity/model';
+import { DeclarationService }      from './declaration/declaration.service';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()

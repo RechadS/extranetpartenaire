@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
-import {AuthenticationService, User, Role, Entreprise} from '../authentication.service';
+import {AuthenticationService} from '../authentication.service';
+import { User, Role, Entreprise } from '../entity/model';
 import {AddUserService} from './add-user.service';
-import {Partenaire} from '../list-partenaire/list-partenaire.component';
+import {Partenaire} from '../partenaire/list-partenaire/list-partenaire.component';
 declare var classie: any;
 declare var SelectFxJs: any;
 declare var inputlabel: any;

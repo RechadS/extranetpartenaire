@@ -1,32 +1,25 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import { User, Role, Entreprise } from '../entity/model';
-import {Partenaire} from '../partenaire/list-partenaire/list-partenaire.component';
+import {Entreprise, Contrat, User, Logiciel} from '../../entity/model';
+import {Partenaire} from '../list-partenaire/list-partenaire.component';
 
-const entrepriseUrl: string = "http://localhost:4567/partenaires";
-const roleUrl: string = "http://localhost:4567/roles";
-const addUserUrl: string = "http://localhost:4567/users";
+const addPartenaireUrl: string = "http://localhost:4567/partenaire";
 
 @Injectable()
-export class AddUserService {
+export class AddPartenaireService {
   
   constructor(private http: Http){
   }
 
-  getRoles():Observable<Role[]>{
-    return this.http.get(roleUrl).map(this.extractData)        
-            .catch(this.handleError);
-  }
-
-  postUser(user: User): Observable<User>{
+  postPartenaire(partenaire: Partenaire): Observable<Partenaire>{
     
-    let body = JSON.stringify(user);
+    let body = JSON.stringify(partenaire);
     
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(addUserUrl, body, options).map(this.extractData)        
+    return this.http.post(addPartenaireUrl, body, options).map(this.extractData)        
             .catch(this.handleError);
   }
 

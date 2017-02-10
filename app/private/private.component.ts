@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }              from '@angular/router';
 import {AuthenticationService} from '../authentication.service';
-import { LeftsidebarComponent } from '../leftsidebar'; 
+import { LeftsidebarComponent } from '../leftsidebar/leftsidebar.component'; 
 
 
 @Component({

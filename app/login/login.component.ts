@@ -1,5 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
-import {AuthenticationService, User} from '../authentication.service';
+import {AuthenticationService} from '../authentication.service';
+import {User} from '../entity/model';
 import {Router, ActivatedRoute } from '@angular/router';
 import { Observable }       from 'rxjs/Observable';
 
